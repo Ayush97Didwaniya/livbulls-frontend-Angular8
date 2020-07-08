@@ -1,0 +1,42 @@
+  .term-plans {
+      padding: 20px;
+  }
+
+  .example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  
+ .row {
+    margin: 0;
+ }
+
+ .item-card {
+    -webkit-box-align: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    /* margin: auto; */
+    /* padding: 0; */
+    margin-left: auto;
+    justify-items: center;
+    margin-right: auto;
+    margin-bottom: 5px;
+ }
+
+ .font-set {
+     font-weight: 600;
+     font-size: 16px;
+ }
+
+ .status-plan {
+    width: 40px;
+ }

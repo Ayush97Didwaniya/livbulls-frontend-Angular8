@@ -1,0 +1,32 @@
+<header class="nav-wrapper">
+  <div class="width-limit">
+      <div class="row header">
+              <div class="col-9 col-sm-9 col-md-4 header-logo-box">
+                  <a href="#" class="brand w-nav-brand w--current"><i class="fa fa-gg" aria-hidden="true">
+                  <span style="font-weight: 600;" class="financialFiesta">FINANCIAL FIESTA</span></i></a>
+              </div>
+              <div class="col-0 col-sm-0 col-md-7 nav-box">
+                  <a class="menu-link w-nav-link bigScreenShow" (click)="sendMessageToParent('home/dashBoard')" app-link="true">
+                    <span class="financial">
+                      DashBoard
+                    </span>
+                  </a>
+                  <a class="menu-link w-nav-link bigScreenShow" (click)="sendMessageToParent('home/referFriend')" app-link="true">Refer a Friend</a>
+                  <a class="menu-link w-nav-link bigScreenShow" (click)="sendMessageToParent('home/learningCenter')" app-link="true">Learning Center</a>
+                  <a class="menu-link w-nav-link bigScreenShow" (click)="sendMessageToParent('home/contactUs')" app-link="true">Contact Us</a>
+             </div>
+            <div class="col-3 col-sm-3 col-md-1 userProfile">
+                      <div class="avatar-button" (click)="dropdownToggle()">
+                         <p style="color:#fff;">{{currentUser.firstName | slice:0:1 | uppercase }}{{currentUser.lastName | slice:0:1 | uppercase}} </p> 
+                      </div>    
+                      <div [ngClass]="toggle ? 'visible header-dropdown': 'header-dropdown'">
+                          <a class="link link-color smallScreenShow" (click)="sendMessageToParent('home/dashBoard')">DashBoard</a>
+                          <a class="link link-color smallScreenShow" (click)="sendMessageToParent('home/referFriend')">Refer a Friend</a>
+                          <a class="link link-color smallScreenShow" (click)="sendMessageToParent('home/learningCenter')">Learning Center</a>
+                          <a class="link link-color smallScreenShow" (click)="sendMessageToParent('home/contactUs')">Contact Us</a>
+                          <a class="link link-color displayBlock" (click)="logout()">Logout</a>
+                      </div>  
+              </div>
+      </div>
+  </div>   
+</header>

@@ -1,0 +1,43 @@
+.facebook-login{
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    background-color: #1a538a;
+        box-shadow: 8px 8px 50px 5px rgba(0,0,0,.14);color: #fff;
+        border-radius: 2px;
+        font-size: 16px;
+        font-weight: 600;
+        height: 48px;
+        margin-bottom: 8px;
+        padding: 0;
+}
+
+.fb-icon {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 16px 0;
+    text-align: center;
+    width: 48px;
+}
+
+.login-google{
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    color: #29303b;
+    background-color: #fff;
+    border: 1px solid #dedfe0;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 2px 0 rgba(41,48,59,.24), 0 0 2px 0 rgba(41,48,59,.12);
+    border-radius: 2px;
+    font-size: 16px;
+    font-weight: 600;
+    height: 48px;
+    margin-bottom: 8px;
+    padding: 0;
+}
+
+.modal-footer{
+    padding: 5px 10px;
+}

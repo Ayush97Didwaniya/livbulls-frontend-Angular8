@@ -1,0 +1,20 @@
+.second-navbar{
+    position: fixed;
+    width: 100%;
+    top: 60px;
+    left: 0;
+    height: 60px;
+    background-color: #5e52a2;
+    color: #fff;
+    z-index: 5;
+    line-height: 60px;
+    font-weight: 500;
+}
+
+.second-nav{
+    line-height: 60px;
+    font-weight: 500;
+    color:white;
+    font-size: 16px;
+    padding:0 20px;
+}

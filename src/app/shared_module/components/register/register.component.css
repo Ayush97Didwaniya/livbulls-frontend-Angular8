@@ -1,0 +1,25 @@
+
+.modal-header .close {
+    margin: 5px 10px;
+    padding-top: 5px;
+}
+
+.modal-header{
+    padding:0px;
+}
+
+.modal-title{
+    margin:5px 10px;
+}
+
+.label-register{
+    width: auto;
+}
+
+.row{
+    flex-wrap: unset;
+}
+
+.label-input{
+    width: auto;
+}
