@@ -6,17 +6,8 @@ import { WelcomeComponent } from './shared_module/components/welcome/welcome.com
 
 export const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard]},
-    { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
+    { path: 'home', loadChildren: () => import('@app/home_module/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
     { path: 'welcome', component: WelcomeComponent},
-  /*   { path: 'home/learningCenter', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
-    { path: 'home/contactUs', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
-    { path: 'home/referFriend', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
-   */ /*  { path: 'home/dashboard', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
-    { path: 'home/learningCenter', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
-    { path: 'home/contactUs', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
-    { path: 'home/referFriend', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
-     */
-    // otherwise redirect to home
     { path: '**', redirectTo: 'home'}
 ];
 

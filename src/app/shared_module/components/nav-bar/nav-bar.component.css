@@ -120,8 +120,9 @@ header.main .nav-box {
 
 .w-nav-link {
     display: inline-block;
+    margin-top: 10px;
     color: #222;
-    padding: 20px 5px 20px 15px;
+    padding: 10px 10px 10px 10px;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
@@ -185,6 +186,13 @@ header .help-button {
     padding-right:8%;
 }
 
+.bigScreenShow:hover {
+    cursor: pointer;
+    border: 1px solid#D0D0D0;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
 @media screen and (min-width: 768px){
     .bigScreenShow{
         display: inline-block;
@@ -217,4 +225,9 @@ header .help-button {
 
 .row {
     margin: 0;
+}
+
+a.disabled {
+    cursor: default;
+    pointer-events: none;
 }

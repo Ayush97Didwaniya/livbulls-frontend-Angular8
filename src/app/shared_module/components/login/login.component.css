@@ -41,3 +41,8 @@
 .modal-footer{
     padding: 5px 10px;
 }
+
+.modal-header .close {
+    margin: 5px;
+    padding: 5px !important;
+}

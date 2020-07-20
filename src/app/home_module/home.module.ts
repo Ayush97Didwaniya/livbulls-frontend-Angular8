@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
-import { ReferFriendComponent } from './refer-friend/refer-friend.component';
-import { LearningCenterComponent } from './learning-center/learning-center.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { HomeComponent } from './home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TermPlansComponent } from './term-plans/term-plans.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { AdminComponent } from './admin/admin.component';
-import { SharedModule } from '../shared_module/shared.module';
+import { HomeComponent } from '@app/home_module/home.component';
+import { ContactUsComponent } from '@app/home_module/components/contact-us/contact-us.component';
+import { ReferFriendComponent } from '@app/home_module/components/refer-friend/refer-friend.component';
+import { DashboardComponent } from '@app/home_module/components/dashboard/dashboard.component';
+import { LearningCenterComponent } from '@app/home_module/components/learning-center/learning-center.component';
+import { TermPlansComponent } from '@app/home_module/components/term-plans/term-plans.component';
+import { AdminComponent } from '@app/home_module/components/admin/admin.component';
 
 @NgModule({
   imports: [

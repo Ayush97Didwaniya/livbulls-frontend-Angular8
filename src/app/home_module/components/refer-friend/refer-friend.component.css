@@ -98,3 +98,12 @@ a {
     border-top: 1px solid #e7ebee;
     padding: 12px 8px;
 }
+
+.referFriendBody {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.info-icon:hover {
+    cursor: pointer;
+}

@@ -4,17 +4,18 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AlertComponent } from '../_components';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from '@app/shared_module/components/alert/alert.component';
 
 
 
 @NgModule({
-  declarations: [ 
+  declarations: [
     NavBarComponent,
     WelcomeComponent,
     LoginComponent,
-    RegisterComponent, AlertComponent],
+    RegisterComponent,
+    AlertComponent],
   imports: [
     CommonModule,
     FormsModule,

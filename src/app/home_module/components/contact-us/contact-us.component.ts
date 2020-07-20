@@ -13,7 +13,7 @@ export class ContactUsComponent implements OnInit {
       console.log('user List', res);
     });
   }
-  
+
   ngOnInit() {
   }
 

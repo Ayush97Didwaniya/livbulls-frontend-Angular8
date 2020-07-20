@@ -9,12 +9,12 @@ import { UserService } from 'src/app/_services';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  quoteForm:  FormGroup;
+  quoteForm: FormGroup;
   loading = false;
-  
+
   constructor(private modalService: NgbModal,
-    private formBuilder: FormBuilder,
-    private userService: UserService) {}
+              private formBuilder: FormBuilder,
+              private userService: UserService) {}
 
   ngOnInit() {
     console.log(this.userService.getAll());

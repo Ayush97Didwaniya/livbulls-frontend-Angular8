@@ -25,12 +25,11 @@ loginForm: FormGroup;
         public activeModal: NgbActiveModal,
     ) {
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) { 
+        if (this.authenticationService.currentUserValue) {
             this.activeModal.close();
-            if(this.authenticationService.currentUserValue['type'] === 'admin') {
-                this.router.navigate(['/home/admin']);    
-            }
-            else {
+            if (this.authenticationService.currentUserValue['type'] === 'admin') {
+                this.router.navigate(['/home/admin']);
+            } else {
                 this.router.navigate(['/home']);
             }
         }
@@ -49,7 +48,6 @@ loginForm: FormGroup;
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
-    
     onSubmit() {
         this.submitted = true;
 
@@ -65,10 +63,9 @@ loginForm: FormGroup;
             data => {
                 this.activeModal.close();
                 console.log(this.returnUrl);
-                if(this.authenticationService.currentUserValue['type'] === 'admin') {
-                    this.router.navigate(['/home/admin']);    
-                }
-                else{
+                if (this.authenticationService.currentUserValue['type'] === 'admin') {
+                    this.router.navigate(['/home/admin']);
+                } else{
                     this.router.navigate([this.returnUrl]);
                 }
             },

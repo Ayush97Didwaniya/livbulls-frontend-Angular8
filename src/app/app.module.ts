@@ -1,18 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './shared_module/components/nav-bar/nav-bar.component';
 import { LoginComponent } from './shared_module/components/login/login.component';
-import { RegisterComponent } from './shared_module/components/register/register.component';
-import { WelcomeComponent } from './shared_module/components/welcome/welcome.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRouting } from './app.routing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './_helpers';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared_module/shared.module';
+import { RegisterComponent } from './shared_module/components/register/register.component';
 
 
 @NgModule({
