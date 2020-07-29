@@ -23,3 +23,8 @@
 .label-input{
     width: auto;
 }
+
+.invalid-feedback {
+    padding-right: 12px;
+    display: block;
+}

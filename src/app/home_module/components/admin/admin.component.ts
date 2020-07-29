@@ -11,6 +11,7 @@ import { UserService } from 'src/app/_services';
 export class AdminComponent implements OnInit {
   quoteForm: FormGroup;
   loading = false;
+  submitted = false;
 
   constructor(private modalService: NgbModal,
               private formBuilder: FormBuilder,
@@ -29,7 +30,8 @@ export class AdminComponent implements OnInit {
 
 
   onQuote() {
-
+    this.submitted = true;
+    console.log('quote function called');
   }
 
   editPlans(termPlan) {

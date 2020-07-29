@@ -5,10 +5,10 @@ import { AuthGuard } from './_guards';
 import { WelcomeComponent } from './shared_module/components/welcome/welcome.component';
 
 export const appRoutes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard]},
+    { path: '', redirectTo: 'welcome', pathMatch: 'full'},
     { path: 'home', loadChildren: () => import('@app/home_module/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
     { path: 'welcome', component: WelcomeComponent},
-    { path: '**', redirectTo: 'home'}
+    { path: '**', redirectTo: 'welcome'}
 ];
 
 @NgModule({
@@ -17,6 +17,6 @@ export const appRoutes: Routes = [
     exports: [RouterModule],
     providers: []
 })
-  
+
 export class AppRouting { }
 

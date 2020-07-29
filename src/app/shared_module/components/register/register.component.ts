@@ -23,9 +23,9 @@ export class RegisterComponent implements OnInit {
       private authenticationService: AuthenticationService,
       private userService: UserService,
       private alertService: AlertService
-  ) { 
+  ) {
       // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) { 
+      if (this.authenticationService.currentUserValue) {
           this.router.navigate(['/']);
       }
   }
@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
       this.registerForm = this.formBuilder.group({
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],
+          email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
           username: ['', Validators.required],
           password: ['', [Validators.required, Validators.minLength(6)]]
       });
@@ -43,6 +44,7 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
+    console.log(this.registerForm);
       this.submitted = true;
 
       // stop here if form is invalid
@@ -57,7 +59,7 @@ export class RegisterComponent implements OnInit {
               data => {
                   this.alertService.success('Registration successful', true);
                   setInterval(() => {
-                      this.activeModal.close('çlose'); 
+                      this.activeModal.close('çlose');
                   }, 3000);
               },
               error => {

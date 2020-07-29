@@ -27,7 +27,7 @@ loginForm: FormGroup;
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
             this.activeModal.close();
-            if (this.authenticationService.currentUserValue['type'] === 'admin') {
+            if (this.authenticationService.currentUserValue.username === 'jitGirdhar') {
                 this.router.navigate(['/home/admin']);
             } else {
                 this.router.navigate(['/home']);

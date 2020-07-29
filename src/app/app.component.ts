@@ -20,11 +20,10 @@ export class AppComponent {
   ) {
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
-  
+
   ngOnInit() {
   }
 
-  
   openLogin() {
     const modalRef = this.modalService.open(LoginComponent);
     modalRef.componentInstance.name = 'Login';
@@ -38,5 +37,5 @@ export class AppComponent {
   routeOnTab(tabName: string) {
     this.router.navigate(['/' + tabName ]);
   }
-  
+
 }

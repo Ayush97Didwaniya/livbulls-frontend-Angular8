@@ -35,4 +35,6 @@ import { RegisterComponent } from './shared_module/components/register/register.
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

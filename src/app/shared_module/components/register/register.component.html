@@ -31,6 +31,18 @@
         </div>
         <div class="form-group">
             <div class="row">
+            <label for="email" class="col-4 label-register">Email</label>
+            <div class="col-8 label-input">    
+            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">Please input email in correct format</div>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
             <label for="username" class="col-4 label-register">Username</label>
             <div class="col-8 label-input">    
             <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
