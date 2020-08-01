@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EventEmitter } from '@angular/core';
 import { User } from 'src/app/_models';
 import { AuthenticationService } from 'src/app/_services';
@@ -13,15 +13,21 @@ import { AuthenticationService } from 'src/app/_services';
 export class NavBarComponent implements OnInit {
   currentUser: User;
   currentUserSubscription: Subscription;
-  toggle:Boolean = false;
+  userAdmin = false;
+  toggle = false;
+
   @Output('tabClicked') tabClicked = new EventEmitter<string>();
-  
+
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
+    public activatedRoute: ActivatedRoute
     ) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
         this.currentUser = user;
+        if (this.currentUser.username === 'jitGirdhar') {
+          this.userAdmin = true;
+        }
     });
     }
 
@@ -31,15 +37,16 @@ export class NavBarComponent implements OnInit {
   dropdownToggle(){
     this.toggle = !this.toggle;
   }
-  
+
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/welcome']);
-  } 
-  
-  sendMessageToParent (tabName: string) {
+  }
+
+  redirectToComponent(tabName: string) {
     console.log(tabName);
-    this.tabClicked.emit(tabName);
+    this.router.navigate([tabName], { relativeTo: this.activatedRoute });
+  /* this.tabClicked.emit(tabName); */
   }
 
 }

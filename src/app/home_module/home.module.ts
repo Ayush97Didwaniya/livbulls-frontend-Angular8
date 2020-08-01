@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { HomeComponent } from '@app/home_module/home.component';
@@ -12,16 +9,14 @@ import { DashboardComponent } from '@app/home_module/components/dashboard/dashbo
 import { LearningCenterComponent } from '@app/home_module/components/learning-center/learning-center.component';
 import { TermPlansComponent } from '@app/home_module/components/term-plans/term-plans.component';
 import { AdminComponent } from '@app/home_module/components/admin/admin.component';
+import { SharedModule } from '@app/shared_module/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     HomeRoutingModule,
-    NgbModule,
     MatCardModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule
+    MatDialogModule
   ],
   declarations: [
     HomeComponent,

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { TermPlansComponent } from '../term-plans/term-plans.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

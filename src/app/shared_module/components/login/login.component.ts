@@ -17,15 +17,16 @@ loginForm: FormGroup;
     returnUrl: string;
 
     constructor(
+        public activeModal: NgbActiveModal,
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService,
-        public activeModal: NgbActiveModal,
+        private alertService: AlertService
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
+            debugger;
             this.activeModal.close();
             if (this.authenticationService.currentUserValue.username === 'jitGirdhar') {
                 this.router.navigate(['/home/admin']);
@@ -63,10 +64,14 @@ loginForm: FormGroup;
             data => {
                 this.activeModal.close();
                 console.log(this.returnUrl);
-                if (this.authenticationService.currentUserValue['type'] === 'admin') {
+                if (this.authenticationService.currentUserValue.username === 'jitGirdhar') {
                     this.router.navigate(['/home/admin']);
-                } else{
-                    this.router.navigate([this.returnUrl]);
+                } else {
+                    if (this.returnUrl !== '/') {
+                        this.router.navigate([this.returnUrl]);
+                    } else {
+                        this.router.navigate(['/home']);
+                    }
                 }
             },
             error => {

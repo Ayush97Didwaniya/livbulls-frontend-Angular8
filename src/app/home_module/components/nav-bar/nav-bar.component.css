@@ -231,3 +231,17 @@ a.disabled {
     cursor: default;
     pointer-events: none;
 }
+
+.header-title-Home {
+    margin: 5px 10px 11px 0px;
+    display: inline-flex;
+    line-height: 30px; padding: 0;    
+}
+
+.header-title-Home:hover {
+    cursor: pointer;
+}
+
+.hide-menu {
+    display: none;
+}

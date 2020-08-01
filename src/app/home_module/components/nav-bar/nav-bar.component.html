@@ -1,0 +1,34 @@
+<header class="nav-wrapper">
+  <div class="width-limit">
+      <div class="row header">
+              <div class="col-9 col-sm-9 col-md-4 header-logo-box">
+                  <div (click)="logout()" class="brand w-nav-brand header-title-Home"><i class="fa fa-gg" aria-hidden="true"></i>
+                  <span style="font-weight: 600;" class="financialFiesta">FINANCIAL FIESTA</span></div>
+              </div>
+              <div class="col-0 col-sm-0 col-md-7 nav-box">
+                  <a [ngClass]="userAdmin ? 'show-menu menu-link w-nav-link bigScreenShow': 'hide-menu menu-link w-nav-link bigScreenShow'" class="menu-link w-nav-link bigScreenShow" (click)="redirectToComponent('./admin')">Admin</a>
+                  <a class="menu-link w-nav-link bigScreenShow" (click)="redirectToComponent('./dashBoard')" app-link="true">
+                    <span class="financial">
+                      DashBoard
+                    </span>
+                  </a>
+                  <a class="menu-link w-nav-link bigScreenShow" (click)="redirectToComponent('./referFriend')" app-link="true">Refer a Friend</a>
+                  <a class="menu-link w-nav-link disabled" (click)="redirectToComponent('./learningCenter')" app-link="true">Learning Center</a>
+                  <a class="menu-link w-nav-link bigScreenShow" (click)="redirectToComponent('./contactUs')" app-link="true">Contact Us</a>
+             </div>
+            <div class="col-3 col-sm-3 col-md-1 userProfile">
+                      <div class="avatar-button" (click)="dropdownToggle()">
+                         <p style="color:#fff;">{{currentUser.firstName | slice:0:1 | uppercase }}{{currentUser.lastName | slice:0:1 | uppercase}} </p> 
+                      </div>    
+                      <div [ngClass]="toggle ? 'visible header-dropdown': 'header-dropdown'">
+                          <a class="link link-color smallScreenShow" (click)="redirectToComponent('./admin')">Admin</a>
+                          <a class="link link-color smallScreenShow" (click)="redirectToComponent('./dashBoard')">DashBoard</a>
+                          <a class="link link-color smallScreenShow" (click)="redirectToComponent('./referFriend')">Refer a Friend</a>
+                          <a class="link link-color smallScreenShow" (click)="redirectToComponent('./learningCenter')">Learning Center</a>
+                          <a class="link link-color smallScreenShow" (click)="redirectToComponent('./contactUs')">Contact Us</a>
+                          <a class="link link-color displayBlock" (click)="logout()">Logout</a>
+                      </div>  
+              </div>
+      </div>
+  </div>   
+</header>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/_services';
+import { UserService, AlertService } from 'src/app/_services';
+import { QuoteService } from '@app/shared_module/services/quotes.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,15 +13,17 @@ export class AdminComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(private modalService: NgbModal,
+  constructor(
               private formBuilder: FormBuilder,
-              private userService: UserService) {}
+              private userService: UserService,
+              private quoteService: QuoteService,
+              private alertService: AlertService) {}
 
   ngOnInit() {
     console.log(this.userService.getAll());
     this.quoteForm = this.formBuilder.group({
-      author: ['', Validators.required],
-      quote: ['', Validators.required],
+      writter: ['', Validators.required],
+      quotation: ['',  [Validators.required, Validators.minLength(10)]],
   });
   }
 
@@ -29,13 +31,30 @@ export class AdminComponent implements OnInit {
   get f() { return this.quoteForm.controls; }
 
 
-  onQuote() {
+  updateQuote() {
     this.submitted = true;
-    console.log('quote function called');
+    // stop here if form is invalid
+    if (this.quoteForm.invalid) {
+      return;
+    }
+    this.loading = true;
+    console.log(this.quoteForm);
+    debugger;
+    this.quoteService.updateQuote(this.quoteForm.value)
+         .subscribe(
+             data => {
+                 this.alertService.success('Quote Updated successfully', true);
+                 this.loading = false;
+             },
+             error => {
+                 this.alertService.error(error);
+                 this.loading = false;
+             });
+    console.log('quote Update function called');
   }
 
   editPlans(termPlan) {
-    this.modalService.open(termPlan, { size: 'lg' });
+  /*   this.modalService.open(termPlan, { size: 'lg' }); */
   }
 
 }

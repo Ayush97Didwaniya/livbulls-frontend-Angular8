@@ -45,15 +45,15 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     console.log(this.registerForm);
-      this.submitted = true;
+    this.submitted = true;
 
       // stop here if form is invalid
-      if (this.registerForm.invalid) {
+    if (this.registerForm.invalid) {
           return;
       }
 
-      this.loading = true;
-      this.userService.register(this.registerForm.value)
+    this.loading = true;
+    this.userService.register(this.registerForm.value)
           .pipe(first())
           .subscribe(
               data => {
@@ -61,6 +61,7 @@ export class RegisterComponent implements OnInit {
                   setInterval(() => {
                       this.activeModal.close('çlose');
                   }, 3000);
+                  this.loading = false;
               },
               error => {
                   this.alertService.error(error);

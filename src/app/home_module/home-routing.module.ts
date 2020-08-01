@@ -5,8 +5,23 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { LearningCenterComponent } from './components/learning-center/learning-center.component';
 import { ReferFriendComponent } from './components/refer-friend/refer-friend.component';
+import { HomeComponent } from './home.component';
 
-export const HomeRoutes: Routes = [
+const HomeRoutes: Routes = [
+    { path: '',
+      component: HomeComponent,
+      children : [
+        { path: '', redirectTo: 'dashBoard', pathMatch: 'full' },
+        { path: 'dashBoard', component:  DashboardComponent},
+        { path: 'admin', component:  AdminComponent},
+        { path: 'contactUs', component: ContactUsComponent},
+        { path: 'learningCenter', component:  LearningCenterComponent},
+        { path: 'referFriend', component: ReferFriendComponent}
+      ]
+    }
+];
+
+/* export const HomeRoutes: Routes = [
     // { path: 'ErrorPage', component: ErrorComponent },
      { path: '',  component: DashboardComponent },
      { path: 'admin',  component: AdminComponent },
@@ -14,8 +29,6 @@ export const HomeRoutes: Routes = [
      { path: 'contactUs',  component: ContactUsComponent },
      { path: 'learningCenter',  component: LearningCenterComponent},
      { path: 'referFriend', component: ReferFriendComponent }
-];
-   
+]; */
+
 export const HomeRoutingModule: ModuleWithProviders = RouterModule.forChild(HomeRoutes);
-   
-   
