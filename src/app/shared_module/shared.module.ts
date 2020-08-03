@@ -7,7 +7,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from '@app/shared_module/components/alert/alert.component';
 import { NavBarComponent } from '@app/home_module/components/nav-bar/nav-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonPopupComponent } from './components/common-popup/common-popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 
+const imports = [
+  MatDialogModule,
+  MatButtonModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatDialogModule
+];
 
 @NgModule({
   declarations: [
@@ -15,15 +27,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     RegisterComponent,
     WelcomeComponent,
-    AlertComponent
+    AlertComponent,
+    CommonPopupComponent
   ],
   imports: [
+    ...imports,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule
   ],
   exports: [
+    ...imports,
     NavBarComponent,
     WelcomeComponent,
     LoginComponent,
@@ -35,7 +50,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule
   ],
   entryComponents : [
-    LoginComponent, RegisterComponent
+    LoginComponent, RegisterComponent,
+    CommonPopupComponent
   ]
 })
 export class SharedModule { }

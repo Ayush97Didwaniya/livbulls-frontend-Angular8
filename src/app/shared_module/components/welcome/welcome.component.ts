@@ -13,7 +13,7 @@ import { QuoteResponse, QuoteAdapter } from '@app/shared_module/models/quote.mod
 })
 export class WelcomeComponent implements OnInit {
   quote: QuoteResponse = new QuoteResponse();
-
+  loginModalRef: any;
   constructor(private modalService: NgbModal,
               private quoteService: QuoteService,
               private router: Router,
@@ -32,14 +32,17 @@ export class WelcomeComponent implements OnInit {
   }
 
   openLogin() {
-    const modalRef = this.modalService.open(LoginComponent, { centered: true });
-    modalRef.componentInstance.name = 'Login';
-    modalRef.result.then((result) => {
-      if (result) {
-        this.router.navigate([result]);
-      }
-    }).catch((res) => {});
-  }
+    this.loginModalRef = this.modalService.open(LoginComponent, { centered: true });
+   // this.loginModalRef.componentInstance.navigateToPath = 'admin';
+    this.loginModalRef.result.then((result) => {
+       if (result) {
+          this.router.navigate([result]);
+       }
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+
 
   openRegister() {
     const modalRef = this.modalService.open(RegisterComponent, { centered: true });
@@ -50,4 +53,5 @@ export class WelcomeComponent implements OnInit {
       }
     }).catch((res) => {});
 }
+
 }

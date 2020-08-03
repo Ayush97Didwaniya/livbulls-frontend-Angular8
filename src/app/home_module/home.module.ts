@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { HomeRoutingModule } from './home-routing.module';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { HomeComponent } from '@app/home_module/home.component';
 import { ContactUsComponent } from '@app/home_module/components/contact-us/contact-us.component';
 import { ReferFriendComponent } from '@app/home_module/components/refer-friend/refer-friend.component';
@@ -10,13 +8,12 @@ import { LearningCenterComponent } from '@app/home_module/components/learning-ce
 import { TermPlansComponent } from '@app/home_module/components/term-plans/term-plans.component';
 import { AdminComponent } from '@app/home_module/components/admin/admin.component';
 import { SharedModule } from '@app/shared_module/shared.module';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
-    SharedModule,
     HomeRoutingModule,
-    MatCardModule,
-    MatDialogModule
+    SharedModule
   ],
   declarations: [
     HomeComponent,

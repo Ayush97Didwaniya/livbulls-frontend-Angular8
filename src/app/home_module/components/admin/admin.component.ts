@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService, AlertService } from 'src/app/_services';
+import { UserService } from 'src/app/_services';
 import { QuoteService } from '@app/shared_module/services/quotes.service';
+import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 
 @Component({
   selector: 'app-admin',
@@ -17,7 +18,7 @@ export class AdminComponent implements OnInit {
               private formBuilder: FormBuilder,
               private userService: UserService,
               private quoteService: QuoteService,
-              private alertService: AlertService) {}
+              private ffSharedService: FFSharedService) {}
 
   ngOnInit() {
     console.log(this.userService.getAll());
@@ -39,16 +40,16 @@ export class AdminComponent implements OnInit {
     }
     this.loading = true;
     console.log(this.quoteForm);
-    debugger;
+
     this.quoteService.updateQuote(this.quoteForm.value)
          .subscribe(
              data => {
-                 this.alertService.success('Quote Updated successfully', true);
-                 this.loading = false;
+                const dialogRef = this.ffSharedService.openAlertPopUp('avav', 'asdas');
+                this.loading = false;
              },
              error => {
-                 this.alertService.error(error);
-                 this.loading = false;
+                const dialogRef = this.ffSharedService.openAlertPopUp('avav', 'asdas');
+                this.loading = false;
              });
     console.log('quote Update function called');
   }

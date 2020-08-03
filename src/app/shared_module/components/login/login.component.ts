@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,36 +15,35 @@ loginForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
+    public navigateToPath = '';
 
     constructor(
         public activeModal: NgbActiveModal,
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
-        private router: Router,
         private authenticationService: AuthenticationService,
         private alertService: AlertService
     ) {
-        // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) {
-            debugger;
-            this.activeModal.close();
-            if (this.authenticationService.currentUserValue.username === 'jitGirdhar') {
-                this.router.navigate(['/home/admin']);
-            } else {
-                this.router.navigate(['/home']);
-            }
-        }
     }
 
     ngOnInit() {
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        // redirect to home if already logged in
+        if (this.authenticationService.currentUserValue) {
+            console.log(this.navigateToPath);
+            if (this.authenticationService.currentUserValue.username === 'jitGirdhar') {
+                this.navigateToPath = '/home/admin';
+            } else {
+                this.navigateToPath = '/home';
+            }
+            this.activeModal.close(this.navigateToPath);
+        }
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
-
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
+
 
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
@@ -56,23 +55,22 @@ loginForm: FormGroup;
         if (this.loginForm.invalid) {
             return;
         }
-
         this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
         .pipe(first())
         .subscribe(
             data => {
-                this.activeModal.close();
                 console.log(this.returnUrl);
                 if (this.authenticationService.currentUserValue.username === 'jitGirdhar') {
-                    this.router.navigate(['/home/admin']);
+                        this.navigateToPath = '/home/admin';
                 } else {
                     if (this.returnUrl !== '/') {
-                        this.router.navigate([this.returnUrl]);
+                        this.navigateToPath = this.returnUrl;
                     } else {
-                        this.router.navigate(['/home']);
+                        this.navigateToPath = '/home';
                     }
                 }
+                this.activeModal.close(this.navigateToPath);
             },
             error => {
                 this.alertService.error(error);
