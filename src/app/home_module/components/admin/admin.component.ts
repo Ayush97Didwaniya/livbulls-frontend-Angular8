@@ -44,11 +44,12 @@ export class AdminComponent implements OnInit {
     this.quoteService.updateQuote(this.quoteForm.value)
          .subscribe(
              data => {
-                const dialogRef = this.ffSharedService.openAlertPopUp('avav', 'asdas');
+               debugger;
+                this.ffSharedService.openAlertPopUp('Message', 'Quote Updated SuccessFully!');
                 this.loading = false;
              },
              error => {
-                const dialogRef = this.ffSharedService.openAlertPopUp('avav', 'asdas');
+                this.ffSharedService.openAlertPopUp('Error', error.toString());
                 this.loading = false;
              });
     console.log('quote Update function called');

@@ -1,5 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, Input } from '@angular/core';
+import { DialogParam } from '@app/shared_module/models/dialog-param.model';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-common-popup',
@@ -7,11 +8,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./common-popup.component.css']
 })
 export class CommonPopupComponent implements OnInit {
+  popupData: DialogParam = new DialogParam();
+  @Input() public dialogDataparam;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private popUpRef: MatDialogRef<CommonPopupComponent>) { }
+  constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
+    this.popupData = this.dialogDataparam;
+    console.log('dialog param Data', this.popupData);
   }
 
+  onCLickOk() {
+    this.activeModal.close('ok');
+  }
 }

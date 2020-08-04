@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login.component';
@@ -11,9 +11,8 @@ import { QuoteResponse, QuoteAdapter } from '@app/shared_module/models/quote.mod
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent implements OnInit, OnDestroy {
   quote: QuoteResponse = new QuoteResponse();
-  loginModalRef: any;
   constructor(private modalService: NgbModal,
               private quoteService: QuoteService,
               private router: Router,
@@ -32,16 +31,16 @@ export class WelcomeComponent implements OnInit {
   }
 
   openLogin() {
-    this.loginModalRef = this.modalService.open(LoginComponent, { centered: true });
-   // this.loginModalRef.componentInstance.navigateToPath = 'admin';
-    this.loginModalRef.result.then((result) => {
-       if (result) {
-          this.router.navigate([result]);
-       }
+    const loginModalRef = this.modalService.open(LoginComponent, { centered: true });
+  //  this.loginModalRef.componentInstance.xyz = 'admin';
+    loginModalRef.result.then((result) => {
+      if (result) {
+        this.router.navigate([result]);
+      }
       }).catch((err) => {
         console.log(err);
-      });
-    }
+    });
+  }
 
 
   openRegister() {
@@ -52,6 +51,10 @@ export class WelcomeComponent implements OnInit {
         console.log(result);
       }
     }).catch((res) => {});
-}
+  }
+
+  ngOnDestroy() {
+//
+  }
 
 }

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthenticationService, AlertService } from 'src/app/_services';
+import { AuthenticationService } from 'src/app/_services';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { AuthenticationService, AlertService } from 'src/app/_services';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-loginForm: FormGroup;
+    loginForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
@@ -22,12 +22,15 @@ loginForm: FormGroup;
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService
     ) {
     }
 
     ngOnInit() {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.loginForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
             console.log(this.navigateToPath);
@@ -36,14 +39,12 @@ loginForm: FormGroup;
             } else {
                 this.navigateToPath = '/home';
             }
-            this.activeModal.close(this.navigateToPath);
+            // set time out included to remove view Ref Change Detection error
+            setTimeout(() => {
+                this.activeModal.close(this.navigateToPath);
+            }, 0);
         }
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
     }
-
 
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
@@ -70,11 +71,15 @@ loginForm: FormGroup;
                         this.navigateToPath = '/home';
                     }
                 }
-                this.activeModal.close(this.navigateToPath);
+                setTimeout(() => {
+                    this.activeModal.close(this.navigateToPath);
+                }, 0);
             },
             error => {
-                this.alertService.error(error);
                 this.loading = false;
             });
-}
+    }
+
+    ngOnDestroy() {
+    }
 }
