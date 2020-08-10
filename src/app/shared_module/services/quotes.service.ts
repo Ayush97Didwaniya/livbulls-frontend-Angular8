@@ -12,8 +12,19 @@ export class QuoteService {
         return this.http.get<QuoteResponse>(`${environment.apiUrl}/api/quotes`);
     }
 
+    addQuote(quote: any, quoteId1: string) {
+        const quoteReqBody = {
+            writter: quote.writter,
+            quotation: quote.quotation,
+            quoteId: quoteId1
+        };
+     /*    const headers = {
+            'Content-Type': 'application/json'
+        }; */
+        return this.http.post(`${environment.apiUrl}/api/quotes/`, quoteReqBody);
+    }
+
     updateQuote(quote: QuoteResponse) {
-        debugger;
-        return this.http.put(`${environment.apiUrl}/api/quotes/5f23081224d7811bc8891519`, quote);
+        return this.http.put(`${environment.apiUrl}/api/quotes/1`, quote);
     }
 }

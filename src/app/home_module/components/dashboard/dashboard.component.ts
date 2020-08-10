@@ -12,24 +12,24 @@ export class DashboardComponent  {
   pauseOnIndicator = false;
   pauseOnHover = true;
   userList = [{
-              name: 'ayush', description: 'Hi My Name Is Ayush. I have been with financial Fiesta' + 
+              name: 'ayush', description: 'Hi My Name Is Ayush. I have been with livbulls' +
               'since 8 months. It was really benificial for me to spend money as per FF guidence.',
                url: '/assets/images/user.jpg'
               },
               {
-                name: 'Jitesh', description: 'Hi My Name Is JItesj. I have been with financial Fiesta' + 
+                name: 'Jitesh', description: 'Hi My Name Is JItesj. I have been with livbulls' +
                 'since 8 months. It was really benificial for me to spend money as per FF guidence.',
                 url: '/assets/images/user.jpg'},
               {
-                name: 'Jitesh', description: 'Hi My Name Is Priyansh. I have been with financial Fiesta' + 
+                name: 'Jitesh', description: 'Hi My Name Is Priyansh. I have been with livbulls' +
                 'since 8 months. It was really benificial for me to spend money as per FF guidence.',
                 url: '/assets/images/user.jpg'},
               {
-                name: 'Jitesh', description: 'Hi My Name Is suhana. I have been with financial Fiesta' + 
+                name: 'Jitesh', description: 'Hi My Name Is suhana. I have been with livbulls' +
                 'since 8 months. It was really benificial for me to spend money as per FF guidence.',
                 url: '/assets/images/user.jpg'},
               {
-                name: 'Jitesh', description: 'Hi My Name Is rahul. I have been with financial Fiesta' + 
+                name: 'Jitesh', description: 'Hi My Name Is rahul. I have been with livbulls' +
                 'since 8 months. It was really benificial for me to spend money as per FF guidence.',
                 url: '/assets/images/user.jpg'}
               ]

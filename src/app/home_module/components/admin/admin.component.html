@@ -25,6 +25,7 @@
         </div>
     </div>
 </form>    
+<button [disabled]="loading" class="btn btn-danger btn-align" style="margin-left: 5px;" (click)="addQuote()">Add Quote</button>
 <button [disabled]="loading" class="btn btn-primary btn-align" (click)="updateQuote()">Update Quote</button>
 <alert></alert>
 </div>
