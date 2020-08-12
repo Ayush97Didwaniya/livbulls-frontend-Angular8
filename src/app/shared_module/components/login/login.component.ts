@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/_services';
+import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private authenticationService: AuthenticationService,
+        private ffSharedService: FFSharedService
     ) {
     }
 
@@ -76,6 +78,7 @@ export class LoginComponent implements OnInit {
                 }, 0);
             },
             error => {
+                this.ffSharedService.openAlertPopUp('Error', error.toString());
                 this.loading = false;
             });
     }

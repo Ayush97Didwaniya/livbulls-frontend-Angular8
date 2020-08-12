@@ -25,6 +25,6 @@ export class QuoteService {
     }
 
     updateQuote(quote: QuoteResponse) {
-        return this.http.put(`${environment.apiUrl}/api/quotes/1`, quote);
+        return this.http.put(`${environment.apiUrl}/api/quotes/`, quote);
     }
 }

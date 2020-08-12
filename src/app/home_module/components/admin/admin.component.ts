@@ -42,11 +42,12 @@ export class AdminComponent implements OnInit {
     this.quoteService.addQuote(this.quoteForm.value, '1')
     .subscribe(
         data => {
-           console.log(data);
+           debugger;
            this.ffSharedService.openAlertPopUp('Message', 'Quote added SuccessFully!');
            this.loading = false;
         },
         error => {
+            debugger;
            this.ffSharedService.openAlertPopUp('Error', error.toString());
            this.loading = false;
         });
