@@ -1,4 +1,4 @@
-/* .second-navbar{
+.second-navbar{
     position: fixed;
     width: 100%;
     top: 60px;
@@ -18,112 +18,6 @@
     font-size: 16px;
     padding:0 20px;
 }
-
-.hsg-page-header {
-    position: relative;
-    display: block;
-    z-index: 0;
-}
-
-img{
-    object-fit: cover;
-    -webkit-filter: contrast(2) grayscale(100%);
-    filter: contrast(2) grayscale(100%);
-    z-index: -1;display: block;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-    max-width: 100%;
-}
-
-@media (min-width: 768px){
-.hsg-page-header__container {
-    padding: 7.5rem 0;
-}
-}
-.hsg-page-header__container {
-    position: relative;
-    padding: 4rem 0;
-    margin: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-.hsg-page-header__content {
-    box-sizing: content-box;
-    max-width: 1080px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 2rem;
-    margin: 51px 0 0 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-.hsg-page-header__text {
-    text-align: center;
-    max-width: 710px;
-    margin: 0 auto;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    color: #fcfcfc;
-    vertical-align: baseline;
-}
-
-.hsg-page-header h1 {
-    margin: 0;
-}
-@media (min-width: 768px){
-h1, .h1 {
-    font-size: 2.555rem;
-    line-height: 1.304em;
-}
-}
-
-p {
-    font-size: 1rem;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    line-height: 1.6111111111111112em;
-}
-
-[data-background-overlay='gradient3']::after {
-    background-image: linear-gradient(45deg, #6a78d1, #00a4bd);
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    content: '';
-    opacity: 0.8;
-    z-index: -1;
-}
-
-.contact-box {
-    margin: 35px;
-    padding:20px;
-    background-color: #fff;
-    border: 2px solid #eaf0f6;
-}
-
-.btn-position{
-    text-align: center;
-} */
 
 @media (max-width: 479px) {
 .section-contact {

@@ -9,6 +9,10 @@ import { TermPlansComponent } from '@app/home_module/components/term-plans/term-
 import { AdminComponent } from '@app/home_module/components/admin/admin.component';
 import { SharedModule } from '@app/shared_module/shared.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { AdminTermPlanComponent } from './components/admin/admin-term-plan/admin-term-plan.component';
+import { AdminQuoteComponent } from './components/admin/admin-quote/admin-quote.component';
+import { AdminUserListComponent } from './components/admin/admin-user-list/admin-user-list.component';
+import { NgbdSortableHeader } from './directive/sortable.directive';
 
 @NgModule({
   imports: [
@@ -22,7 +26,11 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
     DashboardComponent,
     LearningCenterComponent,
     TermPlansComponent,
-    AdminComponent
+    AdminComponent,
+    AdminTermPlanComponent,
+    AdminQuoteComponent,
+    AdminUserListComponent,
+    NgbdSortableHeader
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

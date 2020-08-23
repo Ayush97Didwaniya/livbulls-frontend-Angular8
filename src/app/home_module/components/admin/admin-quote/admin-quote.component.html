@@ -1,0 +1,26 @@
+<div class="update-quote">
+    <form [formGroup]="quoteForm" (ngSubmit)="updateQuote()">
+        <div class="form-group">
+            <div class="row">
+            <label for="writter" class="col-4 label-register">Author</label>
+            <div class="col-8 label-input">
+            <input type="text" formControlName="writter" class="form-control"/>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+            <label for="quotation" class="col-4 label-register">Today's Quote</label>
+            <div class="col-8 label-input">
+            <input type="text" formControlName="quotation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.quotation.errors }" />
+            </div>
+            </div>
+            <div *ngIf="submitted && f.quotation.errors" class="invalid-feedback">
+                <div *ngIf="f.quotation.errors.required">Minimum 10 Character Required</div>
+            </div>
+        </div>
+    </form>    
+    <button [disabled]="loading" class="btn btn-danger btn-align" style="margin-left: 5px;" (click)="addQuote()">Add Quote</button>
+    <button [disabled]="loading" class="btn btn-primary btn-align" (click)="updateQuote()">Update Quote</button>
+    <alert></alert>
+</div>
