@@ -8,5 +8,7 @@
   {{popupData.message}}
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="onCLickOk()">Ok</button>
+  <button *ngIf='okFlag' type="button" class="btn btn-outline-dark" (click)="onCloseModal('ok')">Ok</button>
+  <button *ngIf='yesNoFlag' type="button" class="btn btn-outline-dark" (click)="onCloseModal('yes')">Yes</button>
+  <button *ngIf='yesNoFlag' type="button" class="btn btn-outline-dark" (click)="onCloseModal('no')">No</button>
 </div>

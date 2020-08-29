@@ -37,11 +37,11 @@ export class AdminQuoteComponent implements OnInit {
     this.quoteService.addQuote(this.quoteForm.value, '1')
     .subscribe(
         data => {
-           this.ffSharedService.openAlertPopUp('Message', 'Quote added SuccessFully!');
+           this.ffSharedService.openAlertPopUp('Message', 'Quote added SuccessFully!', true, false);
            this.loading = false;
         },
         error => {
-           this.ffSharedService.openAlertPopUp('Error', error.toString());
+           this.ffSharedService.openAlertPopUp('Error', error.toString(), true, false);
            this.loading = false;
         });
     console.log('quote add function called');
@@ -59,11 +59,11 @@ export class AdminQuoteComponent implements OnInit {
     this.quoteService.updateQuote(this.quoteForm.value)
          .subscribe(
              data => {
-                this.ffSharedService.openAlertPopUp('Message', 'Quote Updated SuccessFully!');
+                this.ffSharedService.openAlertPopUp('Message', 'Quote Updated SuccessFully!', true, false);
                 this.loading = false;
              },
              error => {
-                this.ffSharedService.openAlertPopUp('Error', error.toString());
+                this.ffSharedService.openAlertPopUp('Error', error.toString(), true, false);
                 this.loading = false;
              });
     console.log('quote Update function called');

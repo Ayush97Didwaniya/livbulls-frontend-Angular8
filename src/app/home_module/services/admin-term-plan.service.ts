@@ -1,8 +1,6 @@
 import { Injectable, PipeTransform} from '@angular/core';
 
 import { BehaviorSubject, Observable, of, Subject} from 'rxjs';
-
-import { ADMINTERMPLAN} from '../models/admin-term-plan';
 import { DecimalPipe} from '@angular/common';
 import { debounceTime, delay, switchMap, tap, map} from 'rxjs/operators';
 import { SortDirection} from '../directive/sortable.directive';
@@ -61,7 +59,6 @@ export class AdminTermPlanService {
 
   constructor(private pipe: DecimalPipe, private http: HttpClient, private adminTermPlan: AdminTermPlanAdapter) {
     this.getAdmimTermPlan().subscribe(result => {
-      debugger;
       const res = result;
       this._search$.pipe(
         tap(() => this._loading$.next(true)),
@@ -114,8 +111,11 @@ export class AdminTermPlanService {
 
   getAdmimTermPlan() {
     return this.http.get<any>(`${environment.apiUrl}/api/termPlan`).pipe(map(termPlans => {
-      debugger;
       return termPlans.map(termPlan => this.adminTermPlan.adapt(termPlan));
     }));
+  }
+
+  deleteAdminTermPlan(id) {
+    return this.http.delete<any>(`${environment.apiUrl}/api/termPlan/${id}`);
   }
 }

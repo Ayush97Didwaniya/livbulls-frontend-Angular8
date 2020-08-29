@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
                 }, 0);
             },
             error => {
-                this.ffSharedService.openAlertPopUp('Error', error.toString());
+                this.ffSharedService.openAlertPopUp('Error', error.toString(), true, false);
                 this.loading = false;
             });
     }
