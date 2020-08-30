@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="modal-title">Term Plan</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+      <form [formGroup]="termPlanForm">
+              <div class="form-group">
+                  planName
+                  <input placeholder="planName" type="text" formControlName="planName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.planName.errors }" />
+                  <div *ngIf="submitted && f.planName.errors" class="invalid-feedback">
+                      <div *ngIf="f.planName.errors.required">PlanName is required</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  description 
+                  <input placeholder="description" type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                  <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                      <div *ngIf="f.description.errors.required">description is required</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  url
+                <input placeholder="url" type="text" formControlName="url" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.url.errors }" />
+                <div *ngIf="submitted && f.url.errors" class="invalid-feedback">
+                    <div *ngIf="f.url.errors.required">Url is required</div>
+                </div>
+            </div>
+      </form>
+</div>
+<div class="modal-footer">
+  <button *ngIf='addButtonActive' type=button class="btn btn-primary" (click)="addTermPlan()">Add</button>
+  <button *ngIf='!addButtonActive' type="button" class="btn btn-outline-dark" (click)="updateTermPlan()">Update</button>
+</div>

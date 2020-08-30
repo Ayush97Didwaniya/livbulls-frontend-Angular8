@@ -6,6 +6,8 @@ import {NgbdSortableHeader, SortEvent} from '../../../directive/sortable.directi
 import { AdminTermPlan } from '@app/home_module/models/adminTermPlan';
 import { DecimalPipe } from '@angular/common';
 import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditCreateAdminPlanComponent } from './edit-create-plan/edit-create-admin-plan/edit-create-admin-plan.component';
 
 @Component({
   selector: 'app-admin-term-plan',
@@ -18,11 +20,13 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
   total$: Observable<number>;
   subscription$: Subscription;
   adminTermPlans: AdminTermPlan[];
+  data: AdminTermPlan = new AdminTermPlan();
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   constructor(public service: AdminTermPlanService,
-              private ffSharedService: FFSharedService) {
+              private ffSharedService: FFSharedService,
+              private modalService: NgbModal) {
     this.adminTermPlans$ = service.adminTermPlans$;
     this.subscription$ = this.adminTermPlans$.subscribe(result => {
       this.adminTermPlans = result;
@@ -48,7 +52,14 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
   }
 
   editTermPlan(termPlan) {
+    this.data.id = termPlan.id;
+    this.data.planName = termPlan.planName;
+    this.data.description = termPlan.description;
+    this.data.url = termPlan.url;
 
+    const modalRef = this.modalService.open(EditCreateAdminPlanComponent, { centered: true });
+    modalRef.componentInstance.dialogDataparam = this.data;
+ //   return modalRef;
   }
 
   deletePopup(termPlan) {
@@ -70,7 +81,11 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
     }, error => {
       this.ffSharedService.openAlertPopUp('Error', error, true, false);
     });
-}
+  }
+
+  addTermPlan() {
+    this.modalService.open(EditCreateAdminPlanComponent, { centered: true });
+  }
 
   ngOnDestroy() {
     if (this.subscription$) {

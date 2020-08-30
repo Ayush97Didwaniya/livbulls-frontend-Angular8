@@ -13,6 +13,8 @@ import { AdminTermPlanComponent } from './components/admin/admin-term-plan/admin
 import { AdminQuoteComponent } from './components/admin/admin-quote/admin-quote.component';
 import { AdminUserListComponent } from './components/admin/admin-user-list/admin-user-list.component';
 import { NgbdSortableHeader } from './directive/sortable.directive';
+import { EditCreateAdminPlanComponent
+  } from './components/admin/admin-term-plan/edit-create-plan/edit-create-admin-plan/edit-create-admin-plan.component';
 
 @NgModule({
   imports: [
@@ -30,11 +32,12 @@ import { NgbdSortableHeader } from './directive/sortable.directive';
     AdminTermPlanComponent,
     AdminQuoteComponent,
     AdminUserListComponent,
-    NgbdSortableHeader
+    NgbdSortableHeader,
+    EditCreateAdminPlanComponent
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
-  entryComponents: [TermPlansComponent]
+  entryComponents: [TermPlansComponent, EditCreateAdminPlanComponent]
 })
 export class HomeModule { }
