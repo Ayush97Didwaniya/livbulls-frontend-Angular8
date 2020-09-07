@@ -5,29 +5,26 @@
     </button>
 </div>
 <div class="modal-body">
-      <form [formGroup]="termPlanForm">
-              <div class="form-group">
-                  planName
-                  <input placeholder="planName" type="text" formControlName="planName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.planName.errors }" />
-                  <div *ngIf="submitted && f.planName.errors" class="invalid-feedback">
-                      <div *ngIf="f.planName.errors.required">PlanName is required</div>
-                  </div>
-              </div>
-              <div class="form-group">
-                  description 
-                  <input placeholder="description" type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
-                  <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                      <div *ngIf="f.description.errors.required">description is required</div>
-                  </div>
-              </div>
-              <div class="form-group">
-                  url
-                <input placeholder="url" type="text" formControlName="url" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.url.errors }" />
-                <div *ngIf="submitted && f.url.errors" class="invalid-feedback">
-                    <div *ngIf="f.url.errors.required">Url is required</div>
-                </div>
+    <form [formGroup]="termPlanForm">
+        <div class="form-group">
+            planName
+            <input placeholder="planName" type="text" formControlName="planName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.planName.errors }" />
+            <div *ngIf="submitted && f.planName.errors" class="invalid-feedback">
+                <div *ngIf="f.planName.errors.required">PlanName is required</div>
             </div>
-      </form>
+        </div>
+        <div class="form-group">
+            description 
+            <input placeholder="description" type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required">description is required</div>
+            </div>
+        </div>
+    </form>
+    <div *ngIf='addButtonActive'>
+        image
+        <input type="file" multiple (change)=selectImage($event)/>
+    </div>
 </div>
 <div class="modal-footer">
   <button *ngIf='addButtonActive' type=button class="btn btn-primary" (click)="addTermPlan()">Add</button>

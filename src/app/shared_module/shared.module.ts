@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -48,6 +48,9 @@ const imports = [
     FormsModule,
     ReactiveFormsModule,
     NgbModule
+  ],
+  providers: [
+    DecimalPipe
   ],
   entryComponents : [
     LoginComponent, RegisterComponent,
