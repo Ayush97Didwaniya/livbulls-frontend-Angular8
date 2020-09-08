@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-plan-data.service';
-import { DecimalPipe } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-create-admin-plan',
@@ -15,6 +15,8 @@ export class EditCreateAdminPlanComponent implements OnInit {
   addButtonActive = true;
   images;
   submitted = false;
+  imageUrl: string;
+  imageBaseUrl = environment.imageBaseUrl;
 
   @Input() public dialogDataparam;
 
@@ -28,17 +30,17 @@ export class EditCreateAdminPlanComponent implements OnInit {
       planName : ['', Validators.required],
       description : ['', Validators.required]
     });
-    /* if (this.dialogDataparam) {
+    if (this.dialogDataparam) {
       this.addButtonActive = false;
+      this.imageUrl = this.dialogDataparam.url;
       this.termPlanForm.patchValue(this.dialogDataparam);
-    } */
+    }
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.termPlanForm.controls; }
 
   selectImage(event) {
-    debugger;
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.images = file;
@@ -60,19 +62,47 @@ export class EditCreateAdminPlanComponent implements OnInit {
     formData.append('file', this.images);
     formData.append('planName', this.termPlanForm.get('planName').value);
     formData.append('description', this.termPlanForm.get('description').value);
-    debugger;
     this.termPlanDataservice.addTermPlan(formData).subscribe(result => {
-      console.log(result);
+      if (result) {
+        const modalRef = this.ffSharedService.openAlertPopUp('Message', 'Term Plan added Successfully', true, false);
+        modalRef.result.then(res => {
+          console.log(res);
+          this.activeModal.close('added');
+        }).catch((err) => {
+           console.log(err);
+        });
+      }
     }, error => {
-      debugger;
       this.ffSharedService.openAlertPopUp('Error', error, true, false);
     });
   }
 
   updateTermPlan() {
     console.log(this.termPlanForm);
-    debugger;
-    console.log('id', this.dialogDataparam.id);
-    console.log('update Term Plan');
+    if (!this.images && !this.termPlanForm.dirty) {
+      this.ffSharedService.openAlertPopUp('Error', 'Please update something first', true, false);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('id', this.dialogDataparam.id);
+    formData.append('file', this.images);
+    formData.append('planName', this.termPlanForm.get('planName').value);
+    formData.append('description', this.termPlanForm.get('description').value);
+    formData.append('url', this.imageUrl);
+    this.termPlanDataservice.updateTermPlan(formData).subscribe(result => {
+      console.log(result);
+      if (result) {
+        const modalRef = this.ffSharedService.openAlertPopUp('Message', 'Term Plan Updated Successfully', true, false);
+        modalRef.result.then(res => {
+          console.log(res);
+          this.activeModal.close('updated');
+        }).catch((err) => {
+           console.log(err);
+        });
+      }
+    }, error => {
+      this.ffSharedService.openAlertPopUp('Error', error, true, false);
+    });
   }
 }

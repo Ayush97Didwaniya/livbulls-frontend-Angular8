@@ -16,8 +16,11 @@ export class AdminTermPlanDataService {
     }
 
     addTermPlan(formData) {
-        debugger;
         return this.http.post<any>(`${environment.apiUrl}/api/termPlan`, formData);
+    }
+
+    updateTermPlan(formData) {
+        return this.http.put<any>(`${environment.apiUrl}/api/termPlan`, formData);
     }
 
     deleteAdminTermPlan(id) {

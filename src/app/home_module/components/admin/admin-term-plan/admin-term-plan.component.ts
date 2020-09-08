@@ -8,6 +8,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditCreateAdminPlanComponent } from './edit-create-plan/edit-create-admin-plan/edit-create-admin-plan.component';
 import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-plan-data.service';
 import { AdminTermPlanSharedService } from '@app/home_module/services/admin-term-plan-shared.service';
+import { env } from 'process';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-admin-term-plan',
@@ -20,6 +22,7 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
   subscription$: Subscription;
   adminTermPlans: AdminTermPlan[];
   data: AdminTermPlan = new AdminTermPlan();
+  imagesBaseUrl = environment.imageBaseUrl;
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
@@ -59,6 +62,13 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(EditCreateAdminPlanComponent, { centered: true });
     modalRef.componentInstance.dialogDataparam = this.data;
+    modalRef.result.then((result) => {
+      if (result === 'updated') {
+        this.termPlanSharedService.fetchTermPlan();
+      }
+    }).catch((err) => {
+       console.log(err);
+    });
  //   return modalRef;
   }
 
@@ -84,7 +94,14 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
   }
 
   addTermPlan() {
-    this.modalService.open(EditCreateAdminPlanComponent, { centered: true });
+    const modalRef = this.modalService.open(EditCreateAdminPlanComponent, { centered: true });
+    modalRef.result.then((result) => {
+      if (result === 'added') {
+        this.termPlanSharedService.fetchTermPlan();
+      }
+    }).catch((err) => {
+       console.log(err);
+    });
   }
 
   ngOnDestroy() {

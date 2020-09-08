@@ -21,8 +21,12 @@
             </div>
         </div>
     </form>
-    <div *ngIf='addButtonActive'>
-        image
+    <div *ngIf='!addButtonActive'>
+        Existing Image
+        <img [src]="imageBaseUrl + imageUrl" class="mr-2" style="width: 60px">
+    </div>
+    <div class='imageTag'>
+        Upload New Image
         <input type="file" multiple (change)=selectImage($event)/>
     </div>
 </div>

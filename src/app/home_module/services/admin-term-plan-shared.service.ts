@@ -38,9 +38,8 @@ function sort(adminTermPlan: AdminTermPlan[], column: string, direction: string)
 }
 
 function matches(adminTermPlan: AdminTermPlan, term: string, pipe: PipeTransform) {
-  return adminTermPlan.description.toLowerCase().includes(term)
-    || pipe.transform(adminTermPlan.url).includes(term)
-    || pipe.transform(adminTermPlan.planName).includes(term);
+  return adminTermPlan.description.toLowerCase().includes(term.toLowerCase())
+    || adminTermPlan.planName.toLowerCase().includes(term.toLowerCase());
 }
 
 @Injectable({providedIn: 'root'})
@@ -60,6 +59,10 @@ export class AdminTermPlanSharedService {
 
   constructor(private pipe: DecimalPipe, private http: HttpClient,
               private termPlanDataService: AdminTermPlanDataService) {
+    this.fetchTermPlan();
+  }
+
+  fetchTermPlan() {
     this.termPlanDataService.getAdmimTermPlan().subscribe(result => {
       const res = result;
       this._search$.pipe(
