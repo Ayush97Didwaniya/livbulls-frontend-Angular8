@@ -7,6 +7,7 @@ import { SortDirection} from '../directive/sortable.directive';
 import { AdminTermPlan, AdminTermPlanAdapter } from '../models/adminTermPlan';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AdminTermPlanDataService } from './admin-term-plan-data.service';
 
 interface SearchResult {
   adminTermPlans: AdminTermPlan[];
@@ -37,13 +38,12 @@ function sort(adminTermPlan: AdminTermPlan[], column: string, direction: string)
 }
 
 function matches(adminTermPlan: AdminTermPlan, term: string, pipe: PipeTransform) {
-  return adminTermPlan.description.toLowerCase().includes(term)
-    || pipe.transform(adminTermPlan.url).includes(term)
-    || pipe.transform(adminTermPlan.planName).includes(term);
+  return adminTermPlan.description.toLowerCase().includes(term.toLowerCase())
+    || adminTermPlan.planName.toLowerCase().includes(term.toLowerCase());
 }
 
 @Injectable({providedIn: 'root'})
-export class AdminTermPlanService {
+export class AdminTermPlanSharedService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private _adminTermPlan$ = new BehaviorSubject<AdminTermPlan[]>([]);
@@ -57,8 +57,13 @@ export class AdminTermPlanService {
     sortDirection: ''
   };
 
-  constructor(private pipe: DecimalPipe, private http: HttpClient, private adminTermPlan: AdminTermPlanAdapter) {
-    this.getAdmimTermPlan().subscribe(result => {
+  constructor(private pipe: DecimalPipe, private http: HttpClient,
+              private termPlanDataService: AdminTermPlanDataService) {
+    this.fetchTermPlan();
+  }
+
+  fetchTermPlan() {
+    this.termPlanDataService.getAdmimTermPlan().subscribe(result => {
       const res = result;
       this._search$.pipe(
         tap(() => this._loading$.next(true)),
@@ -107,15 +112,5 @@ export class AdminTermPlanService {
     // 3. paginate
     adminTermPlans = adminTermPlans.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({adminTermPlans, total});
-  }
-
-  getAdmimTermPlan() {
-    return this.http.get<any>(`${environment.apiUrl}/api/termPlan`).pipe(map(termPlans => {
-      return termPlans.map(termPlan => this.adminTermPlan.adapt(termPlan));
-    }));
-  }
-
-  deleteAdminTermPlan(id) {
-    return this.http.delete<any>(`${environment.apiUrl}/api/termPlan/${id}`);
   }
 }

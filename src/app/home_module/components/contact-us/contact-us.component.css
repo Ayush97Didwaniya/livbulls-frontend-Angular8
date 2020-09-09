@@ -234,7 +234,7 @@ input {
     text-transform: none;
 }
 
-.link-explain-plan, .v2button.center, .v2button.choose-plan {
+.v2button.center, .v2button.choose-plan {
     display: block;
     margin-right: auto;
     margin-left: auto;

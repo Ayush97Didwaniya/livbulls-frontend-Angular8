@@ -1,19 +1,20 @@
 import { Component, OnInit, PipeTransform, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import {Observable, Subscription, of} from 'rxjs';
-import {AdminTermPlanService} from '../../../services/admin-term-plan.service';
 
 import {NgbdSortableHeader, SortEvent} from '../../../directive/sortable.directive';
 import { AdminTermPlan } from '@app/home_module/models/adminTermPlan';
-import { DecimalPipe } from '@angular/common';
 import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditCreateAdminPlanComponent } from './edit-create-plan/edit-create-admin-plan/edit-create-admin-plan.component';
+import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-plan-data.service';
+import { AdminTermPlanSharedService } from '@app/home_module/services/admin-term-plan-shared.service';
+import { env } from 'process';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-admin-term-plan',
   templateUrl: './admin-term-plan.component.html',
-  styleUrls: ['./admin-term-plan.component.css'],
-  providers: [ AdminTermPlanService, DecimalPipe]
+  styleUrls: ['./admin-term-plan.component.css']
 })
 export class AdminTermPlanComponent implements OnInit, OnDestroy {
   adminTermPlans$: Observable<AdminTermPlan[]>;
@@ -21,17 +22,19 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
   subscription$: Subscription;
   adminTermPlans: AdminTermPlan[];
   data: AdminTermPlan = new AdminTermPlan();
+  imagesBaseUrl = environment.imageBaseUrl;
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
-  constructor(public service: AdminTermPlanService,
+  constructor(public termPlanDataService: AdminTermPlanDataService,
+              private termPlanSharedService: AdminTermPlanSharedService,
               private ffSharedService: FFSharedService,
               private modalService: NgbModal) {
-    this.adminTermPlans$ = service.adminTermPlans$;
+    this.adminTermPlans$ = this.termPlanSharedService.adminTermPlans$;
     this.subscription$ = this.adminTermPlans$.subscribe(result => {
       this.adminTermPlans = result;
     });
-    this.total$ = service.total$;
+    this.total$ = this.termPlanSharedService.total$;
   }
 
   ngOnInit() {
@@ -47,8 +50,8 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.service.sortColumn = column;
-    this.service.sortDirection = direction;
+    this.termPlanSharedService.sortColumn = column;
+    this.termPlanSharedService.sortDirection = direction;
   }
 
   editTermPlan(termPlan) {
@@ -59,6 +62,13 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(EditCreateAdminPlanComponent, { centered: true });
     modalRef.componentInstance.dialogDataparam = this.data;
+    modalRef.result.then((result) => {
+      if (result === 'updated') {
+        this.termPlanSharedService.fetchTermPlan();
+      }
+    }).catch((err) => {
+       console.log(err);
+    });
  //   return modalRef;
   }
 
@@ -74,7 +84,7 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
   }
 
   deleteTermPlan(termPlan) {
-    this.service.deleteAdminTermPlan(termPlan.id).subscribe(result => {
+    this.termPlanDataService.deleteAdminTermPlan(termPlan.id).subscribe(result => {
       if (result) {
         this.adminTermPlans$ = of(this.adminTermPlans.filter(val => val.id !== termPlan.id));
       }
@@ -84,7 +94,14 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
   }
 
   addTermPlan() {
-    this.modalService.open(EditCreateAdminPlanComponent, { centered: true });
+    const modalRef = this.modalService.open(EditCreateAdminPlanComponent, { centered: true });
+    modalRef.result.then((result) => {
+      if (result === 'added') {
+        this.termPlanSharedService.fetchTermPlan();
+      }
+    }).catch((err) => {
+       console.log(err);
+    });
   }
 
   ngOnDestroy() {
