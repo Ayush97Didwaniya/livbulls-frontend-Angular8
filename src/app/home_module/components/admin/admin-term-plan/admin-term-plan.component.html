@@ -1,7 +1,7 @@
 <form>
     <div class="form-group form-inline align-termPlanSearch">
-        <div>
-            Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="termPlanSharedService.searchTerm"/>
+    <div>
+        Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="termPlanSharedService.searchTerm"/>
             <span class="ml-3" *ngIf="termPlanSharedService.loading$ | async">Loading...</span>
         </div>
         <button class="btn btn-danger btn-align" (click)="addTermPlan()">Add TermPlan</button>
@@ -26,7 +26,8 @@
         <td>
             <ngb-highlight [result]="adminTermPlan.planName" [term]="termPlanSharedService.searchTerm"></ngb-highlight>
         </td>
-        <td><ngb-highlight [result]="adminTermPlan.description" [term]="termPlanSharedService.searchTerm"></ngb-highlight></td>
+        <td>
+          <ngb-highlight [result]="adminTermPlan.description" [term]="termPlanSharedService.searchTerm"></ngb-highlight></td>
         <td>
             <a class="table-link">
                 <span class="fa-stack" (click)='editTermPlan(adminTermPlan)'>
