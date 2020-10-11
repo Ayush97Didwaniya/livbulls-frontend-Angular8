@@ -192,7 +192,7 @@ header .help-button {
     border-radius: 5px;
 }
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 860px){
     .bigScreenShow{
         display: inline-block;
     }
@@ -200,10 +200,16 @@ header .help-button {
     .smallScreenShow{
         display: none;  
     }
- 
+
     .userProfile{
-        padding-right:2%;
-    }    
+        padding-right: 2%;
+    }  
+}
+
+@media screen and (min-width: 460px) and (max-width: 860px) {
+    .userProfile{
+        padding-right: 4%;
+    }  
 }
 
 .displayBlock{
@@ -220,6 +226,7 @@ header .help-button {
     width: 100%;
     z-index: 999;
     top: 0;
+    height: 60px;
 }
 
 .row {

@@ -44,6 +44,7 @@
     font-size: 18px;
     -webkit-box-align: center;
     align-items: center;
+    color: #fff !important;
 }
 
 
@@ -58,14 +59,14 @@
     }
 }
 
-::ng-deep .carousel-control-next-icon {
+/* ::ng-deep .carousel-control-next-icon {
     background-image: url(/assets/images/slider-next.png) !important;
 }
 
 ::ng-deep .carousel-control-prev-icon {
     background-image: url(/assets/images/slider-next.png) !important;
     transform: rotate(180deg);
-}
+} */
 
 .carousel-main {
     border-bottom: 2px solid grey;
