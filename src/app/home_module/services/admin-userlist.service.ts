@@ -7,6 +7,7 @@ import { SortDirection} from '../directive/sortable.directive';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
+
 interface SearchResult {
   adminUserList: AdminUserList[];
   total: number;
@@ -20,64 +21,64 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const Users: AdminUserList[] = [
-  {
-  id: 1,
-  firstName: 'Shubham',
-  lastName: 'Aggarwal',
-  email: 'shub.agg22@liv.com',
-  imageUrl: 'https://bootdey.com/img/Content/user_2.jpg'
-},
-{
-  id: 2,
-  firstName: 'aman',
-  lastName: 'Aggarwal',
-  email: 'shub.agg225@liv.com',
-  imageUrl: 'https://bootdey.com/img/Content/user_1.jpg'
-},
-{
-  id: 3,
-  firstName: 'Shubham',
-  lastName: 'jain',
-  email: 'shub.agg221@liv.com',
-  imageUrl: 'https://bootdey.com/img/Content/user_3.jpg'
-},
-{
-  id: 4,
-  firstName: 'kush',
-  lastName: 'Aggarwal',
-  email: 'shub.agg122@liv.com',
-  imageUrl: 'https://bootdey.com/img/Content/user_2.jpg'
-},
-{
-  id: 5,
-  firstName: 'Shubham',
-  lastName: 'gupta',
-  email: 'shub.agg202@liv.com',
-  imageUrl: 'https://bootdey.com/img/Content/user_1.jpg'
-},
-{
-  id: 6,
-  firstName: 'ankit',
-  lastName: 'Aggarwal',
-  email: 'shub.agg122@liv.com',
-  imageUrl: 'https://bootdey.com/img/Content/user_2.jpg'
-},
-{
-  id: 7,
-  firstName: 'Shubham',
-  lastName: 'goyal',
-  email: 'shub.agg2112@liv.com',
-  imageUrl: 'https://bootdey.com/img/Content/user_3.jpg'
-},
-{
-  id: 8,
-  firstName: 'aman',
-  lastName: 'jain',
-  email: 'shub.agg2112@liv.com',
-  imageUrl: 'https://bootdey.com/img/Content/user_1.jpg'
-}
-];
+// const Users: AdminUserList[] = [
+//   {
+//   id: 1,
+//   firstName: 'Shubham',
+//   lastName: 'Aggarwal',
+//   email: 'shub.agg22@liv.com',
+//   imageUrl: 'https://bootdey.com/img/Content/user_2.jpg'
+// },
+// {
+//   id: 2,
+//   firstName: 'aman',
+//   lastName: 'Aggarwal',
+//   email: 'shub.agg225@liv.com',
+//   imageUrl: 'https://bootdey.com/img/Content/user_1.jpg'
+// },
+// {
+//   id: 3,
+//   firstName: 'Shubham',
+//   lastName: 'jain',
+//   email: 'shub.agg221@liv.com',
+//   imageUrl: 'https://bootdey.com/img/Content/user_3.jpg'
+// },
+// {
+//   id: 4,
+//   firstName: 'kush',
+//   lastName: 'Aggarwal',
+//   email: 'shub.agg122@liv.com',
+//   imageUrl: 'https://bootdey.com/img/Content/user_2.jpg'
+// },
+// {
+//   id: 5,
+//   firstName: 'Shubham',
+//   lastName: 'gupta',
+//   email: 'shub.agg202@liv.com',
+//   imageUrl: 'https://bootdey.com/img/Content/user_1.jpg'
+// },
+// {
+//   id: 6,
+//   firstName: 'ankit',
+//   lastName: 'Aggarwal',
+//   email: 'shub.agg122@liv.com',
+//   imageUrl: 'https://bootdey.com/img/Content/user_2.jpg'
+// },
+// {
+//   id: 7,
+//   firstName: 'Shubham',
+//   lastName: 'goyal',
+//   email: 'shub.agg2112@liv.com',
+//   imageUrl: 'https://bootdey.com/img/Content/user_3.jpg'
+// },
+// {
+//   id: 8,
+//   firstName: 'aman',
+//   lastName: 'jain',
+//   email: 'shub.agg2112@liv.com',
+//   imageUrl: 'https://bootdey.com/img/Content/user_1.jpg'
+// }
+// ];
  
 
 function compare(v1, v2) {
@@ -115,12 +116,18 @@ export class AdminUserListService {
     sortDirection: ''
   };
 
-  constructor(private pipe: DecimalPipe, private http: HttpClient, private adminUserList: AdminUserListAdapter) {
-  
+  constructor(private pipe: DecimalPipe, private http: HttpClient,
+    private adminUsers: AdminUserListAdapter) {
+this.fetchUserList();
+}
+
+fetchUserList(){
+  this.getAdmimUserList().subscribe(result => {
+    const res = result;
       this._search$.pipe(
         tap(() => this._loading$.next(true)),
         debounceTime(200),
-        switchMap(() => this._search()),
+        switchMap(() => this._search(res)),
         delay(200),
         tap(() => this._loading$.next(false))
       ).subscribe(result => {
@@ -128,7 +135,10 @@ export class AdminUserListService {
         this._total$.next(result.total);
       });
       this._search$.next();
-   
+    }, error => {
+      console.error('error coming');
+    });
+   console.log(this._adminUserList$);
   }
 
   get adminUserList$() { return this._adminUserList$.asObservable(); }
@@ -149,11 +159,11 @@ export class AdminUserListService {
     this._search$.next();
   }
 
-  private _search(): Observable<SearchResult> {
+  private _search(result): Observable<SearchResult> {
     const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
     // 1. sort
-    let adminUserList = sort(Users, sortColumn, sortDirection);
+    let adminUserList = sort(result, sortColumn, sortDirection);
 
     // 2. filter
     adminUserList = adminUserList.filter(adminUserList => matches(adminUserList, searchTerm, this.pipe));
@@ -163,7 +173,11 @@ export class AdminUserListService {
     adminUserList = adminUserList.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({adminUserList, total});
   }
-
+  getAdmimUserList() {
+        return this.http.get<any>(`${environment.apiUrl}/users`).pipe(map(users => {
+            return users.map(users => this.adminUsers.adapt(users));
+        }));
+    }
   // getAdmimUserList() {
   //   // return this.http.get<any>(`${environment.apiUrl}/api/termPlan`).pipe(map(termPlans => {
   //   //   return termPlans.map(termPlan => this.adminTermPlan.adapt(termPlan));

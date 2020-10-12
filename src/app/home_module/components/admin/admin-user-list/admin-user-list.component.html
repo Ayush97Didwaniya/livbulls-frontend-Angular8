@@ -4,7 +4,7 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th scope="col">#</th>
+        <!-- <th scope="col">#</th> -->
         <th sortable="name" scope="col" (sort)="onSort($event)">User</th>
         <th scope="col" sortable="area" (sort)="onSort($event)">email</th>
         <th scope="col"> operations </th>
@@ -12,7 +12,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let adminUserList of adminUserList$ | async">
-        <th scope="row">{{ adminUserList.id }}</th>
+        <!-- <th scope="row">{{ adminUserList.id }}</th> -->
         <td>
           <img [src]="adminUserList.imageUrl" class="mr-2" style="width: 50px">
         <ngb-highlight [result]="adminUserList.firstName +' '+adminUserList.lastName" [term]="service.searchTerm">
@@ -20,8 +20,7 @@
          <td>
           <ngb-highlight [result]="adminUserList.email" >            
           </ngb-highlight></td>
-
-         <td>
+         
             <a class="table-link">
                 <span class="fa-stack" (click)='editTermPlan(adminTermPlan)'>
                     <i class="fa fa-square fa-stack-2x"></i>
