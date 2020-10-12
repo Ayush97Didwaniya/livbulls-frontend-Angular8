@@ -3,7 +3,7 @@
       <div class="row header">
               <div class="col-9 col-sm-9 col-md-4 header-logo-box">
                   <div (click)="logout()" class="brand w-nav-brand header-title-Home"><i class="fa fa-gg" aria-hidden="true"></i>
-                  <span style="font-weight: 600;" class="livbulls">livbulls</span></div>
+                  <span style="font-weight: 600;" class="livbulls">Livbulls</span></div>
               </div>
               <div class="col-0 col-sm-0 col-md-7 nav-box">
                   <a [ngClass]="userAdmin ? 'show-menu menu-link w-nav-link bigScreenShow': 'hide-menu menu-link w-nav-link bigScreenShow'" class="menu-link w-nav-link bigScreenShow" (click)="redirectToComponent('./admin')">Admin</a>
@@ -13,7 +13,7 @@
                     </span>
                   </a>
                   <a class="menu-link w-nav-link bigScreenShow" (click)="redirectToComponent('./referFriend')" app-link="true">Refer a Friend</a>
-                  <a class="menu-link w-nav-link disabled" (click)="redirectToComponent('./learningCenter')" app-link="true">Learning Center</a>
+                  <a class="menu-link w-nav-link disabled bigScreenShow" (click)="redirectToComponent('./learningCenter')" app-link="true">Learning Center</a>
                   <a class="menu-link w-nav-link bigScreenShow" (click)="redirectToComponent('./contactUs')" app-link="true">Contact Us</a>
              </div>
             <div class="col-3 col-sm-3 col-md-1 userProfile">

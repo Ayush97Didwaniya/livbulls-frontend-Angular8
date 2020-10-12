@@ -14,25 +14,30 @@ export class DashboardComponent  {
   userList = [{
               name: 'ayush', description: 'Hi My Name Is Ayush. I have been with livbulls' +
               'since 8 months. It was really benificial for me to spend money as per FF guidence.',
-               url: '/assets/images/user.jpg'
+               url: '/assets/images/user.jpg',
+               image: '/assets/images/dashboard5.jpg'
               },
               {
                 name: 'Jitesh', description: 'Hi My Name Is JItesj. I have been with livbulls' +
                 'since 8 months. It was really benificial for me to spend money as per FF guidence.',
-                url: '/assets/images/user.jpg'},
+                url: '/assets/images/user.jpg',
+                image: '/assets/images/dashboard5.jpg'},
               {
                 name: 'Jitesh', description: 'Hi My Name Is Priyansh. I have been with livbulls' +
                 'since 8 months. It was really benificial for me to spend money as per FF guidence.',
-                url: '/assets/images/user.jpg'},
+                url: '/assets/images/user.jpg',
+                image: '/assets/images/dashboard5.jpg'},
               {
                 name: 'Jitesh', description: 'Hi My Name Is suhana. I have been with livbulls' +
                 'since 8 months. It was really benificial for me to spend money as per FF guidence.',
-                url: '/assets/images/user.jpg'},
+                url: '/assets/images/user.jpg',
+                image: '/assets/images/dashboard5.jpg'},
               {
                 name: 'Jitesh', description: 'Hi My Name Is rahul. I have been with livbulls' +
                 'since 8 months. It was really benificial for me to spend money as per FF guidence.',
-                url: '/assets/images/user.jpg'}
-              ]
+                url: '/assets/images/user.jpg',
+                image: '/assets/images/dashboard5.jpg'}
+              ];
 
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 

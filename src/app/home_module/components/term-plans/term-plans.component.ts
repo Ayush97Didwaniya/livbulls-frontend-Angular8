@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-plan-data.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-term-plans',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./term-plans.component.css']
 })
 export class TermPlansComponent implements OnInit {
-
-  constructor() { }
+  termPlans = [];
+  private base_Image_url = environment.imageBaseUrl;
+  constructor(private termPlanDataService: AdminTermPlanDataService) { }
 
   ngOnInit() {
+    this.getTermPlanList();
   }
 
+  getTermPlanList() {
+    this.termPlanDataService.getAdmimTermPlan().subscribe(result => {
+      debugger;
+      console.log('imageBaseUrl:', this.base_Image_url);
+      this.termPlans = result;
+    });
+  }
 }
