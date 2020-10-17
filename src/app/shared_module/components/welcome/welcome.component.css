@@ -273,12 +273,8 @@ box-shadow: 0 1rem 0 0 rgba(0, 0, 0, 0.15) !important;
     padding-bottom: 30px;
     background-image: -webkit-gradient(linear,left bottom,left top,from(#a33880),color-stop(52%,#711e8b),to(#5309a3));
     background-image: linear-gradient(0deg,#ffc3a0,#cc2b5e 52%,#e73398);
-    /*  background-image: linear-gradient(0deg,#f7bb97,#dd5e89 52%,#2c3e50); */
     box-shadow: inset 0 0 50px 0 rgba(0,0,0,.29);
 }
-/* 
-background-image: linear-gradient(0deg,#a33880,#711e8b 52%,#5309a3);
-     */
 
 .container-5 {
     padding-right: 21px;
