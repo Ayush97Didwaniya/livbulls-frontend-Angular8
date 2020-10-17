@@ -9,6 +9,7 @@ import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  active = 1;
   constructor(
               private userService: UserService,
   ) {}

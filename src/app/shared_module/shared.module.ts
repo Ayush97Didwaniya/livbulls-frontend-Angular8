@@ -13,13 +13,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { FFSpinnerComponent } from './components/ff-spinner/ff-spinner.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const imports = [
   MatDialogModule,
   MatButtonModule,
   MatFormFieldModule,
   MatCardModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
@@ -37,6 +39,7 @@ const imports = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    
     NgbModule
   ],
   exports: [

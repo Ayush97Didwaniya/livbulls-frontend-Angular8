@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TermPlansComponent implements OnInit {
   termPlans = [];
-  private base_Image_url = environment.imageBaseUrl;
+  base_Image_url = environment.imageBaseUrl;
   constructor(private termPlanDataService: AdminTermPlanDataService) { }
 
   ngOnInit() {

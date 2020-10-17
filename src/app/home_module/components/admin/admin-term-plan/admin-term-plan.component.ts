@@ -27,7 +27,7 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   constructor(public termPlanDataService: AdminTermPlanDataService,
-              private termPlanSharedService: AdminTermPlanSharedService,
+              public termPlanSharedService: AdminTermPlanSharedService,
               private ffSharedService: FFSharedService,
               private modalService: NgbModal) {
     this.adminTermPlans$ = this.termPlanSharedService.adminTermPlans$;

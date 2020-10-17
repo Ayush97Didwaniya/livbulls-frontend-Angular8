@@ -16,5 +16,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
+  routeOnTab(event) {
+    console.log('will be handle in future');
+  }
 }
