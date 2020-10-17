@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { FFSpinnerComponent } from './components/ff-spinner/ff-spinner.component';
 
 const imports = [
   MatDialogModule,
@@ -28,7 +29,8 @@ const imports = [
     RegisterComponent,
     WelcomeComponent,
     AlertComponent,
-    CommonPopupComponent
+    CommonPopupComponent,
+    FFSpinnerComponent
   ],
   imports: [
     ...imports,

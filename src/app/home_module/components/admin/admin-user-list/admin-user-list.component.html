@@ -16,11 +16,11 @@
         <td>
           <img [src]="adminUserList.imageUrl" class="mr-2" style="width: 50px">
         <ngb-highlight [result]="adminUserList.firstName +' '+adminUserList.lastName" [term]="service.searchTerm">
-        </ngb-highlight></td>
+        </ngb-highlight><td>
          <td>
           <ngb-highlight [result]="adminUserList.email" >            
           </ngb-highlight></td>
-         
+         <td>
             <a class="table-link">
                 <span class="fa-stack" (click)='editTermPlan(adminTermPlan)'>
                     <i class="fa fa-square fa-stack-2x"></i>
