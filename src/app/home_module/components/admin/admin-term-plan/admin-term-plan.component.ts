@@ -10,6 +10,7 @@ import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-p
 import { AdminTermPlanSharedService } from '@app/home_module/services/admin-term-plan-shared.service';
 import { env } from 'process';
 import { environment } from 'src/environments/environment';
+import { AppInit } from '@app/core/adapter/services/app.init.service';
 
 @Component({
   selector: 'app-admin-term-plan',
@@ -22,7 +23,7 @@ export class AdminTermPlanComponent implements OnInit, OnDestroy {
   subscription$: Subscription;
   adminTermPlans: AdminTermPlan[];
   data: AdminTermPlan = new AdminTermPlan();
-  imagesBaseUrl = environment.imageBaseUrl;
+  imagesBaseUrl = AppInit.settings.image.image_base_Url;
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 

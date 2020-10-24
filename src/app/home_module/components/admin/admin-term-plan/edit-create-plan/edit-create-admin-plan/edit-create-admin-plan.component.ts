@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-plan-data.service';
 import { environment } from 'src/environments/environment';
+import { AppInit } from '@app/core/adapter/services/app.init.service';
 
 @Component({
   selector: 'app-edit-create-admin-plan',
@@ -16,7 +17,7 @@ export class EditCreateAdminPlanComponent implements OnInit {
   images;
   submitted = false;
   imageUrl: string;
-  imageBaseUrl = environment.imageBaseUrl;
+  private imageBaseUrl = AppInit.settings.image.image_base_Url;
 
   @Input() public dialogDataparam;
 

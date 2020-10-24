@@ -6,6 +6,7 @@ import { debounceTime, delay, switchMap, tap, map} from 'rxjs/operators';
 import { SortDirection} from '../directive/sortable.directive';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AppInit } from '@app/core/adapter/services/app.init.service';
 
 
 interface SearchResult {
@@ -107,7 +108,7 @@ export class AdminUserListService {
   private _search$ = new Subject<void>();
   private _adminUserList$ = new BehaviorSubject<AdminUserList[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
-
+  private API_BASE_URL = AppInit.settings.apiServer.base_url_backend;
   private _state: State = {
     page: 1,
     pageSize: 4,
@@ -173,16 +174,11 @@ fetchUserList(){
     adminUserList = adminUserList.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({adminUserList, total});
   }
+
   getAdmimUserList() {
-        return this.http.get<any>(`${environment.apiUrl}/users`).pipe(map(users => {
+        return this.http.get<any>(`${this.API_BASE_URL}/users`).pipe(map(users => {
             return users.map(users => this.adminUsers.adapt(users));
         }));
-    }
-  // getAdmimUserList() {
-  //   // return this.http.get<any>(`${environment.apiUrl}/api/termPlan`).pipe(map(termPlans => {
-  //   //   return termPlans.map(termPlan => this.adminTermPlan.adapt(termPlan));
-  //   // }));
-  //   return Users;
-  // }
+  }
 
 }

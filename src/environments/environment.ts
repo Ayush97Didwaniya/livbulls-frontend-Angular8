@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4000',
-  imageBaseUrl: 'http://localhost:4000/'
+  name: 'local'
 };
 
 /*

@@ -4,13 +4,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../_models';
-import { environment } from 'src/environments/environment';
+import { AppInit } from '@app/core/adapter/services/app.init.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-
+    private API_BASE_URL = AppInit.settings.apiServer.base_url_backend;
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -21,7 +21,7 @@ export class AuthenticationService {
     }
 
     public login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
+        return this.http.post<any>(`${this.API_BASE_URL}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {

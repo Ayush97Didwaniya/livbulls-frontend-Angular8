@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppInit } from '@app/core/adapter/services/app.init.service';
 import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-plan-data.service';
 import { environment } from 'src/environments/environment';
 
@@ -9,7 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class TermPlansComponent implements OnInit {
   termPlans = [];
-  base_Image_url = environment.imageBaseUrl;
+  private baseImageUrl = AppInit.settings.image.image_base_Url;
+
   constructor(private termPlanDataService: AdminTermPlanDataService) { }
 
   ngOnInit() {
@@ -18,8 +20,7 @@ export class TermPlansComponent implements OnInit {
 
   getTermPlanList() {
     this.termPlanDataService.getAdmimTermPlan().subscribe(result => {
-      debugger;
-      console.log('imageBaseUrl:', this.base_Image_url);
+      console.log('imageBaseUrl:', this.baseImageUrl);
       this.termPlans = result;
     });
   }

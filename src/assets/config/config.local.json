@@ -1,0 +1,19 @@
+{
+    "env": {
+        "name": "LOCAL",
+        "sessionExpireInseconds": 3600
+    },
+    "apiServer": {
+        "base_url_backend": "https://livbullsbackend.herokuapp.com"
+    },
+    "image": {
+        "image_base_Url": "https://localhost:4000/"
+    },
+    "logger": {
+       "// level:": "TRACE=0, DEBUG=1, INFO=2, LOG=3, WARN=4, ERROR=5, FATA=6, OFF=7",
+        "level": 1,
+        "serverLogLevel": 5,
+        "// serverLoggingUrl": "auth/logs",
+        "disableConsoleLogging": false
+    }
+}
