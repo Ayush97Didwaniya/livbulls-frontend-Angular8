@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TermPlansComponent implements OnInit {
   termPlans = [];
-  private baseImageUrl = AppInit.settings.image.image_base_Url;
+  baseImageUrl = AppInit.settings.image.image_base_Url;
 
   constructor(private termPlanDataService: AdminTermPlanDataService) { }
 

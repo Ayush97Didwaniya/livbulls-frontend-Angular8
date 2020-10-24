@@ -17,7 +17,7 @@ export class EditCreateAdminPlanComponent implements OnInit {
   images;
   submitted = false;
   imageUrl: string;
-  private imageBaseUrl = AppInit.settings.image.image_base_Url;
+  imageBaseUrl = AppInit.settings.image.image_base_Url;
 
   @Input() public dialogDataparam;
 
