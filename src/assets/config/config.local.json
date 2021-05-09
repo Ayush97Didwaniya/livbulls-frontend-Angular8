@@ -4,10 +4,10 @@
         "sessionExpireInseconds": 3600
     },
     "apiServer": {
-        "base_url_backend": "https://livbullsbackend.herokuapp.com"
+        "base_url_backend": "http://localhost:4000"
     },
     "image": {
-        "image_base_Url": "https://localhost:4000/"
+        "image_base_Url": "http://localhost:4000/"
     },
     "logger": {
        "// level:": "TRACE=0, DEBUG=1, INFO=2, LOG=3, WARN=4, ERROR=5, FATA=6, OFF=7",

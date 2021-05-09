@@ -2,8 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
-import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-plan-data.service';
-import { environment } from 'src/environments/environment';
+import { AdminTermPlanDataService } from '@app/livbulls_modules/home_module/components/admin/services/admin-term-plan-data.service';
 import { AppInit } from '@app/core/adapter/services/app.init.service';
 
 @Component({
@@ -63,6 +62,7 @@ export class EditCreateAdminPlanComponent implements OnInit {
     formData.append('file', this.images);
     formData.append('planName', this.termPlanForm.get('planName').value);
     formData.append('description', this.termPlanForm.get('description').value);
+    debugger;
     this.termPlanDataservice.addTermPlan(formData).subscribe(result => {
       if (result) {
         const modalRef = this.ffSharedService.openAlertPopUp('Message', 'Term Plan added Successfully', true, false);

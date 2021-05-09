@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppInit } from '@app/core/adapter/services/app.init.service';
-import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-plan-data.service';
-import { environment } from 'src/environments/environment';
+import { AdminTermPlanDataService } from '@app/livbulls_modules/home_module/components/admin/services/admin-term-plan-data.service';
 
 @Component({
   selector: 'app-term-plans',

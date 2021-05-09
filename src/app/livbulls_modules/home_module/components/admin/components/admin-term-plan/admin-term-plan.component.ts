@@ -1,16 +1,15 @@
-import { Component, OnInit, PipeTransform, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import {Observable, Subscription, of} from 'rxjs';
 
-import {NgbdSortableHeader, SortEvent} from '../../../directive/sortable.directive';
-import { AdminTermPlan } from '@app/home_module/models/adminTermPlan';
+import {NgbdSortableHeader, SortEvent} from '../../../../directive/sortable.directive';
+import { AdminTermPlan } from '@app/livbulls_modules/home_module/components/admin/modals/adminTermPlan.modal';
 import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditCreateAdminPlanComponent } from './edit-create-plan/edit-create-admin-plan/edit-create-admin-plan.component';
-import { AdminTermPlanDataService } from '@app/home_module/services/admin-term-plan-data.service';
-import { AdminTermPlanSharedService } from '@app/home_module/services/admin-term-plan-shared.service';
-import { env } from 'process';
-import { environment } from 'src/environments/environment';
+import { EditCreateAdminPlanComponent } from './edit-create-admin-plan/edit-create-admin-plan.component';
+import { AdminTermPlanDataService } from '@app/livbulls_modules/home_module/components/admin/services/admin-term-plan-data.service';
+
 import { AppInit } from '@app/core/adapter/services/app.init.service';
+import { AdminTermPlanSharedService } from '../../services/admin-term-plan-shared.service';
 
 @Component({
   selector: 'app-admin-term-plan',

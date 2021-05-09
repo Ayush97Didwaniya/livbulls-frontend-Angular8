@@ -1,36 +1,33 @@
-
-import { User } from '@app/_models/user';
-import { Component, OnInit, PipeTransform, ViewChildren, QueryList, OnDestroy } from '@angular/core';
-import {Observable, Subscription, of} from 'rxjs';
-import { AdminUserListService } from '@app/home_module/services/admin-userlist.service';
-import { AdminUserList, AdminUserListAdapter } from '@app/home_module/models/adminUserList';
-import {NgbdSortableHeader, SortEvent} from '../../../directive/sortable.directive';
+import { Component, OnInit, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
+import {NgbdSortableHeader, SortEvent} from '../../../../directive/sortable.directive';
 import { DecimalPipe } from '@angular/common';
-import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditUserDetailComponent } from './edit-user-detail/edit-user-detail.component';
+import { UserLoginData } from '../../modals/user.modal';
+import { AdminUserSharedService } from '../../services/admin-user-shared.service';
+
 @Component({
   selector: 'app-admin-user-list',
   templateUrl: './admin-user-list.component.html',
   styleUrls: ['./admin-user-list.component.css'],
-  providers: [ AdminUserListService, DecimalPipe]
+  providers: [ AdminUserSharedService, DecimalPipe]
 })
 export class AdminUserListComponent implements OnInit , OnDestroy {
 
-  adminUserList$: Observable<AdminUserList[]>;
+  adminUserList$: Observable<UserLoginData[]>;
   total$: Observable<number>;
   subscription$: Subscription;
-  adminUserList: AdminUserList[];
-  data: AdminUserList = new AdminUserList();
+  data: UserLoginData = new UserLoginData();
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
-  constructor(public service: AdminUserListService,
-              private ffSharedService: FFSharedService,
+  constructor(public service: AdminUserSharedService,
               private modalService: NgbModal) {
     this.adminUserList$ = service.adminUserList$;
-    this.subscription$ = this.adminUserList$.subscribe(result => {
+    /* this.subscription$ = this.adminUserList$.subscribe(result => {
       this.adminUserList = result;
-    });
+    }); */
     this.total$ = service.total$;
   }
 
@@ -40,7 +37,6 @@ export class AdminUserListComponent implements OnInit , OnDestroy {
   }
 
   onSort({column, direction}: SortEvent) {
-
     // resetting other headers
     this.headers.forEach(header => {
       if (header.sortable !== column) {
@@ -51,6 +47,18 @@ export class AdminUserListComponent implements OnInit , OnDestroy {
     this.service.sortColumn = column;
     this.service.sortDirection = direction;
   }
+  
+  editUserDetail(user: any) {
+    const modalRef = this.modalService.open(EditUserDetailComponent, { centered: true, size: 'lg'});
+    modalRef.componentInstance.dialogDataparam = user;
+    modalRef.result.then((result) => {
+      debugger;
+    }).catch((err) => {
+       console.log(err);
+    });
+
+  }
+
   ngOnDestroy() {
     if (this.subscription$) {
       this.subscription$.unsubscribe();

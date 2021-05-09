@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AdminTermPlanAdapter } from '../models/adminTermPlan';
+import { AdminTermPlanAdapter } from '../modals/adminTermPlan.modal';
 import { map } from 'rxjs/operators';
 import { AppInit } from '@app/core/adapter/services/app.init.service';
 

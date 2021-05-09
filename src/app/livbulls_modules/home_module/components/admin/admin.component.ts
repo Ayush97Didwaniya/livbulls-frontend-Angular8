@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/_services';
-import { QuoteService } from '@app/shared_module/services/quotes.service';
-import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -11,9 +9,9 @@ import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 export class AdminComponent implements OnInit {
   active = 1;
   constructor(
-              private userService: UserService,
+              public route: ActivatedRoute
   ) {}
-
+  
   ngOnInit() {
   }
 }

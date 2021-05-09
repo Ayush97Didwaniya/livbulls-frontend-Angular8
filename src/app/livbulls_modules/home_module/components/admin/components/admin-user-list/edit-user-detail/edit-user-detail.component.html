@@ -1,0 +1,59 @@
+<div class="modal-header">
+  <h4 class="modal-title">User Detail</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="userDetailForm">
+    <div class="row">
+      <div class="form-group col-6" formGroupName='userLoginData'>
+        First Name
+        <input placeholder="First Name" type="text" formControlName="firstName" class="form-control"/>
+      </div>
+      <div class="form-group col-6" formGroupName='userLoginData'>
+        Last Name 
+        <input placeholder="Last Name" type="text" formControlName="lastName" class="form-control"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-6" formGroupName='userLoginData'>
+        Email
+        <input placeholder="" type="text" formControlName="email" class="form-control"/>
+    </div>
+    <div class="form-group col-6" formGroupName='userDetail'>
+        Parent User Email 
+        <input placeholder="Parent User Email " type="text" formControlName="parentUser_email" class="form-control" />
+    </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-6" formGroupName='userDetail'>
+          Contact
+          <input placeholder="contact" type="text" formControlName="contact" class="form-control"/>
+      </div>
+      <div class="form-group col-6" formGroupName='userLoginData'>
+        username
+        <input placeholder="" type="text" formControlName="username" class="form-control"/>
+      </div>
+      <div class="form-group col-6">
+        <mat-form-field>
+          <mat-label>term Plans</mat-label>
+          <mat-select [formControl]="termPlansForm" multiple>
+            <mat-option *ngFor="let termPlanValue of termPlansList" [value]="termPlanValue.id">{{termPlanValue.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <div>
+      Existing Image
+      <img [src]="imageBaseUrl + imageUrl" class="mr-2" style="width: 60px">
+  </div>
+  <div class='imageTag'>
+      Upload New Image
+      <input type="file" multiple (change)=selectImage($event)/>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="updateUserDetail()">Update</button>
+</div>

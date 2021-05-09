@@ -6,7 +6,7 @@ import { WelcomeComponent } from './shared_module/components/welcome/welcome.com
 
 export const appRoutes: Routes = [
     { path: '', redirectTo: 'welcome', pathMatch: 'full'},
-    { path: 'home', loadChildren: () => import('@app/home_module/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
+    { path: 'home', loadChildren: () => import('@app/livbulls_modules/home_module/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
     { path: 'welcome', component: WelcomeComponent},
     { path: '**', redirectTo: 'welcome'}
 ];
