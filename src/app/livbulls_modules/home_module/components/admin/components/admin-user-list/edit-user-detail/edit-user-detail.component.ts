@@ -6,6 +6,7 @@ import { UserCompleteDetail, UserLoginData } from '../../../modals/user.modal';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AppInit } from '@app/core/adapter/services/app.init.service';
 import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
+import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-edit-user-detail',
   templateUrl: './edit-user-detail.component.html',
@@ -17,7 +18,6 @@ export class EditUserDetailComponent implements OnInit, OnDestroy {
   userCompleteDetails: UserCompleteDetail = new UserCompleteDetail();
   userDetailForm: FormGroup;
 
-  termPlansForm= new FormControl();
   termPlansList= [];
   
   imageBaseUrl = AppInit.settings.image.image_base_Url;
@@ -26,6 +26,9 @@ export class EditUserDetailComponent implements OnInit, OnDestroy {
 
   subscriber$: any;
 
+  userDetailApiCalled = false;
+  userLoginApiCalled = false;
+
   constructor(public activeModal: NgbActiveModal,
               public userDetailservice: AdminUserDataService,
               public termPlanDataService: AdminTermPlanDataService,
@@ -33,7 +36,6 @@ export class EditUserDetailComponent implements OnInit, OnDestroy {
               ) { }
 
   ngOnInit() {
-    debugger;
     this.userCompleteDetails.userLoginData = this.dialogDataparam;
     this.initializeFormGroup();
     this.getAllTermPlans();
@@ -61,6 +63,7 @@ export class EditUserDetailComponent implements OnInit, OnDestroy {
       userDetail: new FormGroup({
         contact: new FormControl(),
         parentUser_email: new FormControl(),
+        term_plans: new FormControl()
       })
     })
   }
@@ -78,22 +81,19 @@ export class EditUserDetailComponent implements OnInit, OnDestroy {
   callUserDetailApi(userDetailRef: string) {
     this.subscriber$ = this.userDetailservice.getUserDetail(userDetailRef).subscribe(res=> {
       this.userCompleteDetails.userDetails = res;
-      this.termPlansForm.setValue(res.term_plans);
       this.imageUrl = res.imageUrl;
       this.setFormData();
     })
   }
 
   setFormData() {
-    console.log(this.userDetailForm.dirty);
     this.userDetailForm.patchValue({
       userLoginData:  this.userCompleteDetails.userLoginData
     });
-    debugger;
+
     this.userDetailForm.patchValue({
       userDetail:  this.userCompleteDetails.userDetails
     });
-    console.log(this.userDetailForm.dirty);
   }
 
   ngOnDestroy() {
@@ -103,25 +103,27 @@ export class EditUserDetailComponent implements OnInit, OnDestroy {
   }
 
   updateUserDetail() {
-    debugger;
-    console.log(this.termPlansForm.value);
     let userDetailChanged=true;
-    if (!this.images && !this.userDetailForm.get('userDetail').dirty && !this.termPlansForm.dirty) {
+    if (!this.images && !this.userDetailForm.get('userDetail').dirty) {
       userDetailChanged =  false;
     }
     if(userDetailChanged) {
       const formData = new FormData();
       formData.append('id', this.dialogDataparam.userDetailRef);
       formData.append('file', this.images);
-      formData.append('termPlans', this.termPlansForm.value);
+      formData.append('termPlans', this.userDetailForm.get('userDetail').get('term_plans').value);
       formData.append('parentUserMail', this.userDetailForm.get('userDetail').get('parentUser_email').value);
       formData.append('contact', this.userDetailForm.get('userDetail').get('contact').value);
       formData.append('imageUrl', this.imageUrl);
       this.userDetailservice.updateUserDetail(formData).subscribe(res=> {
-        debugger;
+        this.userDetailApiCalled = true;
+        this.showSuccessPopup();
       }, error => {
-      //  this.ffSharedService.openAlertPopUp('Error', error, true, false);
+        this.userDetailApiCalled = true;
+        this.showErrorPopup();
       })
+    } else {
+      this.userDetailApiCalled = true;
     }
 
     let userLoginDataChange = true;
@@ -129,10 +131,41 @@ export class EditUserDetailComponent implements OnInit, OnDestroy {
       userLoginDataChange = false;
     }
     if(userLoginDataChange) {
-
+      const loginData = this.userDetailForm.get('userLoginData');
+      const params = new HttpParams().append('username', loginData.get('username').value)
+      .append('firstName', loginData.get('firstName').value)
+      .append('lastName', loginData.get('lastName').value)
+      .append('email', loginData.get('email').value)
+      
+      this.userDetailservice.updateUserLoginData(this.dialogDataparam.id, params).subscribe(res=> {
+        this.userLoginApiCalled = true;
+        this.showSuccessPopup();
+      }, error => {
+        this.userLoginApiCalled = true;
+        this.showErrorPopup();
+      })
+    } else {
+      this.userLoginApiCalled = true;
     }
-    if(userDetailChanged && userLoginDataChange) {
+    if(!userDetailChanged && !userLoginDataChange) {
       this.ffSharedService.openAlertPopUp('Error', 'Please update something first', true, false);
     } 
+  }
+
+  showSuccessPopup() {
+    if(this.userDetailApiCalled && this.userLoginApiCalled) {
+      const successRef = this.ffSharedService.openAlertPopUp('Success', 'user Detail updated successfully,', true, false);
+      successRef.result.then(data=> {
+        if(data && data === 'ok') {
+          this.activeModal.close('updated');
+        }
+      });
+    }
+  }
+
+  showErrorPopup() {
+    if(this.userDetailApiCalled && this.userLoginApiCalled) {
+      this.ffSharedService.openAlertPopUp('Error', 'User Detail Not updated.', true, false);
+    }
   }
 }

@@ -62,7 +62,7 @@ export class EditCreateAdminPlanComponent implements OnInit {
     formData.append('file', this.images);
     formData.append('planName', this.termPlanForm.get('planName').value);
     formData.append('description', this.termPlanForm.get('description').value);
-    debugger;
+
     this.termPlanDataservice.addTermPlan(formData).subscribe(result => {
       if (result) {
         const modalRef = this.ffSharedService.openAlertPopUp('Message', 'Term Plan added Successfully', true, false);

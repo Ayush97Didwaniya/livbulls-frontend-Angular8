@@ -36,9 +36,9 @@
         <input placeholder="" type="text" formControlName="username" class="form-control"/>
       </div>
       <div class="form-group col-6">
-        <mat-form-field>
+        <mat-form-field formGroupName='userDetail'>
           <mat-label>term Plans</mat-label>
-          <mat-select [formControl]="termPlansForm" multiple>
+          <mat-select formControlName="term_plans" multiple>
             <mat-option *ngFor="let termPlanValue of termPlansList" [value]="termPlanValue.id">{{termPlanValue.name}}</mat-option>
           </mat-select>
         </mat-form-field>

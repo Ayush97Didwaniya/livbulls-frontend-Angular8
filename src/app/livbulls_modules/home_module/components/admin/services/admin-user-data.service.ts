@@ -17,13 +17,19 @@ export class AdminUserDataService {
 
     getAllUserData() {
         return this.http.get<any>(`${this.API_BASE_URL}/users`).pipe(map(users => {
-            debugger;
             return users.map(users => this.userLoginData.adapt(users));
         }));
     }
 
+    updateUserLoginData(id, param) {
+        return this.http.put<any>(`${this.API_BASE_URL}/users/${id}`, param);
+    }
+
     updateUserDetail(formData) {
-        debugger;
         return this.http.put<any>(`${this.API_BASE_URL}/api/userDetail`, formData);
+    }
+
+    deleteUserData(id) {
+        return this.http.delete<any>(`${this.API_BASE_URL}/users/${id}`);
     }
 }

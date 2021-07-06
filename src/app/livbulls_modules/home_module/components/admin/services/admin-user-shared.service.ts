@@ -70,7 +70,6 @@ export class AdminUserSharedService {
           delay(200),
           tap(() => this._loading$.next(false))
         ).subscribe(result => {
-          debugger;
           this._adminUserList$.next(result.adminUserList);
           this._total$.next(result.total);
         });

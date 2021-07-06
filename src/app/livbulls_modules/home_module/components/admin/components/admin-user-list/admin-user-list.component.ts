@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditUserDetailComponent } from './edit-user-detail/edit-user-detail.component';
 import { UserLoginData } from '../../modals/user.modal';
 import { AdminUserSharedService } from '../../services/admin-user-shared.service';
+import { AdminUserDataService } from '../../services/admin-user-data.service';
+import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 
 @Component({
   selector: 'app-admin-user-list',
@@ -23,7 +25,9 @@ export class AdminUserListComponent implements OnInit , OnDestroy {
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   constructor(public service: AdminUserSharedService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private adminUserDataService: AdminUserDataService,
+              private ffSharedService: FFSharedService) {
     this.adminUserList$ = service.adminUserList$;
     /* this.subscription$ = this.adminUserList$.subscribe(result => {
       this.adminUserList = result;
@@ -52,12 +56,23 @@ export class AdminUserListComponent implements OnInit , OnDestroy {
     const modalRef = this.modalService.open(EditUserDetailComponent, { centered: true, size: 'lg'});
     modalRef.componentInstance.dialogDataparam = user;
     modalRef.result.then((result) => {
-      debugger;
+      if(result && result==='updated') {
+        this.service.fetchUserList();
+      }
     }).catch((err) => {
        console.log(err);
     });
 
   }
+
+  deleteUser(id: any) {
+    this.adminUserDataService.deleteUserData(id).subscribe(data => {
+      this.ffSharedService.openAlertPopUp('Success', data.res, true, false);
+      this.service.fetchUserList();
+    }, err => {
+      this.ffSharedService.openAlertPopUp('Error', err, true, false);
+    })
+  } 
 
   ngOnDestroy() {
     if (this.subscription$) {
