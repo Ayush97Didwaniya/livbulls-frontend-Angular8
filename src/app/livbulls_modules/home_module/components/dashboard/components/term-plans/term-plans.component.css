@@ -3,7 +3,7 @@
   }
 
   .example-card {
-    max-width: 400px;
+    width: 100%;
     border-left: 6px solid red;
   }
   
@@ -22,7 +22,7 @@
  }
 
  .font-set {
-     font-weight: 600;
+     font-weight: 500;
      font-size: 12px;
      margin-top: 4px;
      padding-right: 5px;
@@ -31,6 +31,7 @@
  .status-plan {
     width: 20px;
     height: 25px;
+    margin-right: 2px;
  }
 
  .termplan-body {
@@ -43,5 +44,11 @@
 
 .card-bottom {
    display: flex;
-   justify-content: center;
+   float: right;
+   margin-right: 5px;
+}
+.card-bottom-text {
+   font-size: 14px;
+   margin-top: 2px;
+   margin-right: 5px;
 }

@@ -4,10 +4,10 @@ import {NgbdSortableHeader, SortEvent} from '../../../../directive/sortable.dire
 import { DecimalPipe } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditUserDetailComponent } from './edit-user-detail/edit-user-detail.component';
-import { UserLoginData } from '../../modals/user.modal';
-import { AdminUserSharedService } from '../../services/admin-user-shared.service';
-import { AdminUserDataService } from '../../services/admin-user-data.service';
+import { AdminUserDataService } from '../../../../services/admin-user-data.service';
 import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
+import { AdminUserSharedService } from '@app/livbulls_modules/home_module/services/admin-user-shared.service';
+import { UserLoginData } from '@app/livbulls_modules/home_module/models/user.modal';
 
 @Component({
   selector: 'app-admin-user-list',

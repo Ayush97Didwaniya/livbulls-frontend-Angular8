@@ -12,8 +12,15 @@
         </mat-card-content>
         <mat-card-actions>
             <div class='card-bottom'>
-                <img src="/assets/images/cross-tick.jpg" alt="" class="status-plan"> 
-                <p class="font-set">InActive</p>
+                <span class="card-bottom-text">status:</span>
+                <div *ngIf='!isTermPlanSubscribed(termplan.id)'>
+                    <img src="/assets/images/cross-tick.jpg" alt="" class="status-plan"> 
+                    <span class="font-set">InActive</span>
+                </div>
+                <div *ngIf='isTermPlanSubscribed(termplan.id)'>
+                    <img src="/assets/images/right-tick.png" alt="" class="status-plan"> 
+                    <span class="font-set">Active</span>    
+                </div>
             </div>    
         </mat-card-actions>
     </mat-card>

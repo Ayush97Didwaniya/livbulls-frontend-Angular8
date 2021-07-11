@@ -4,8 +4,9 @@ import { DecimalPipe} from '@angular/common';
 import { debounceTime, delay, switchMap, tap, map} from 'rxjs/operators';
 import { AppInit } from '@app/core/adapter/services/app.init.service';
 import { SortDirection } from '@app/livbulls_modules/home_module/directive/sortable.directive';
-import { UserLoginData } from '../modals/user.modal';
+
 import { AdminUserDataService } from './admin-user-data.service';
+import { UserLoginData } from '../models/user.modal';
 
 interface SearchResult {
   adminUserList: UserLoginData[];

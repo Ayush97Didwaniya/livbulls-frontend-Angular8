@@ -22,25 +22,27 @@
 .dasboard-content{
     width: 100%;
     margin-top: 120px;    
+    padding: 10px 0px;
+    background-color: #E0E0E0;
+    height: calc(100vh - 120px);
 }
 
 .image-dashboard{
     width:100%;
     height: 70vh;
 }
-
+/* 
 .round-image {
     border-radius: 50%;
     padding: 4px;
     margin: 25% 25% 25% 50%;
     width: 120px;
     border: 3px solid orange;
-}
+} */
 
 .description-user {
-    display: flex;
-    padding-right: 15%;
-    padding-left: 0;
+    display: grid;
+    padding: 50px 15% 50px 15%;
     font-size: 18px;
     -webkit-box-align: center;
     align-items: center;
@@ -59,19 +61,38 @@
     }
 }
 
-/* ::ng-deep .carousel-control-next-icon {
-    background-image: url(/assets/images/slider-next.png) !important;
-}
-
-::ng-deep .carousel-control-prev-icon {
-    background-image: url(/assets/images/slider-next.png) !important;
-    transform: rotate(180deg);
-} */
-
 .carousel-main {
     border-bottom: 2px solid grey;
 }
 
 ::ng-deep .mat-card-image {
     padding: 25px;
+}
+
+.feedback-desc {
+    background-color: #F5F5F5;
+}
+
+.title {
+    margin-left: 35px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.dashboard-plans {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.feedback-title {
+    display: flex;
+    justify-content: space-around;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 20px auto;
+}
+
+.feedbacks {
+    background-color: #e8e8e8;
+    padding: 20px;
 }

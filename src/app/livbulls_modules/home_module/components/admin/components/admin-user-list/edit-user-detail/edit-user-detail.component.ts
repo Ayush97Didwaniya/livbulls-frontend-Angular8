@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AdminUserDataService } from '../../../services/admin-user-data.service';
 import { AdminTermPlanDataService } from '../../../services/admin-term-plan-data.service';
-import { UserCompleteDetail, UserLoginData } from '../../../modals/user.modal';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AppInit } from '@app/core/adapter/services/app.init.service';
 import { FFSharedService } from '@app/shared_module/services/ff-shared.service';
 import { HttpParams } from '@angular/common/http';
+import { AdminUserDataService } from '@app/livbulls_modules/home_module/services/admin-user-data.service';
+import { UserCompleteDetail, UserLoginData } from '@app/livbulls_modules/home_module/models/user.modal';
 @Component({
   selector: 'app-edit-user-detail',
   templateUrl: './edit-user-detail.component.html',

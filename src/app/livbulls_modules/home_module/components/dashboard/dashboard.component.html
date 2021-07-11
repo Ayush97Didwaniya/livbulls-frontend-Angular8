@@ -4,17 +4,7 @@
     </div>
 </nav>
 <div class="dasboard-content">
-<ngb-carousel #carousel [interval]="2000" data-interval="false" [pauseOnHover]="pauseOnHover" (slide)="onSlide($event)" class="carousel-main">
-    <ng-template ngbSlide *ngFor="let user of userList; index as i">
-      <div class="row tuo" [style.background]="'url(' + user.image + ')'">
-        <div class="col-sm-12 col-md-4">
-        <img src="{{user.url}}" alt="user" class="round-image">
-        </div>
-        <div class="col-sm-12 col-md-8 description-user">
-          {{user.description}}
-        </div>
-      </div>      
-    </ng-template>
-</ngb-carousel>
-<app-term-plans></app-term-plans>
+<div class="dashboard-plans">
+  <span class="title">Term Plans Status:</span>
+  <app-term-plans [termPlanData]='this.userData.term_plans'></app-term-plans>
 </div>

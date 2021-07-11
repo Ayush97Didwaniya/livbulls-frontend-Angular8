@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { AppInit } from "@app/core/adapter/services/app.init.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { UserDetail, UserLoginDataAdapter } from "../modals/user.modal";
+import { UserDetail, UserLoginDataAdapter } from "../models/user.modal";
 
 @Injectable({providedIn: 'root'})
 export class AdminUserDataService {

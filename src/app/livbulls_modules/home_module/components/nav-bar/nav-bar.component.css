@@ -5,6 +5,11 @@
     top:3px;
 }
 
+.livbullsLogo {
+    height: 70px;
+    width: 70px;
+}
+
 header.nav-wrapper .header-dropdown.visible {
     pointer-events: all;
     opacity: 1;
