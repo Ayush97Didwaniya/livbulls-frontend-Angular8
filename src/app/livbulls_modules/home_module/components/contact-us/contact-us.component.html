@@ -7,23 +7,35 @@
   <div class="w-container">
      <h1 class="heading white">Contact</h1>
      <div class="below-heading-text">We're just a message away with answers to all your queries on financial planning!</div>
-     <ul class="unordered-list">
-        <li class="list-item">Understand and appreciate the personal financial planning process</li>
-        <li class="list-item">Understand how to set financial goals</li>
-        <li class="list-item">Understand how to assess financial goals</li>
-        <li class="list-item">Understand difference between brokers, agents, advisers, CA</li>
-        <li class="list-item">Understand how NOT to choose investment schemes</li>
-        <li class="list-item">Understand the right way to choose investment schemes</li>
-        <li class="list-item">Take a step forward towards their financial freedom</li>
-        <li class="list-item">Feel more content with their existing financial status, and happily look forward to prosperity</li>
-     </ul>
      <div class="w-form">
-        <form id="email-form" name="email-form" data-name="Email Form"><input type="text" id="name-2" name="name-2" data-name="Name 2" placeholder="Your Name" maxlength="256" required="" class="input-field w-input"><input type="email" id="email-2" name="email-2" data-name="Email 2" placeholder="Your personal email address" maxlength="256" required="" class="input-field w-input"><input type="tel" id="email-2" name="email-2" data-name="Email 2" placeholder="Your phone number" maxlength="256" class="input-field w-input"><textarea id="Message" name="Message" placeholder="Your query" maxlength="5000" required="" data-name="Message" class="input-field w-input"></textarea><input type="submit" value="Submit" data-wait="Please wait..." class="v2button center w-button"></form>
-        <div class="success-message w-form-done">
+         <form [formGroup]="contactUsForm">
+            <input type="text" formControlName="name" placeholder="Your Name" maxlength="70" class="input-field w-input" [ngClass]="{ 'is-invalid': submitted && f.name?.errors }">
+            <div *ngIf="submitted && f.name?.errors" class="invalid-feedback">
+               <div *ngIf="f.name?.errors.required">Name is required</div>
+            </div>
+            <input type="email" formControlName="emailId" placeholder="Your personal email address"
+               maxlength="70" class="input-field w-input" [ngClass]="{ 'is-invalid': submitted && f.emailId?.errors }">
+            <div *ngIf="submitted && f.emailId?.errors" class="invalid-feedback">
+               <div *ngIf="f.emailId?.errors.required">Email is required</div>
+               <div *ngIf="f.emailId?.errors.email">Please input email in correct format</div>
+               </div>
+            <input type="tel" formControlName="phoneNumber" data-name="Email 2" placeholder="Your phone number" maxlength="10" class="input-field w-input" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber?.errors }">
+            <div *ngIf="submitted && f.phoneNumber?.errors" class="invalid-feedback">
+               <div *ngIf="f.phoneNumber?.errors.required">Phone Number is required</div>
+            </div>
+            <textarea type="text" formControlName="message" placeholder="Your query" maxlength="5000"
+               class="input-field w-input">
+            </textarea>
+            <div *ngIf="submitted && f.message?.errors" class="invalid-feedback">
+               <div *ngIf="f.message?.errors.required">Your Query is required</div>
+            </div>
+            <input type="submit" value="Submit" (click)="onSubmit()" data-wait="Please wait..." class="v2button center w-button" [ngClass]="{ 'is-invalid': submitted && f.firstName?.errors }">
+         </form>
+        <div class="success-message" *ngIf='isSuccess'>
            <div class="text-block">Thanks. Your message has been received. We'll get back to you very soon!<strong></strong></div>
         </div>
-        <div class="error-message w-form-fail">
-           <div class="text-block-2">Oops! Something went wrong while submitting the form</div>
+        <div class="error-message" *ngIf='isError'>
+           <div class="text-block-2">Oops! Something went wrong while submitting the form. Please try again after sometime.</div>
         </div>
      </div>
   </div>
